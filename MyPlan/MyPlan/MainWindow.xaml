@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyPlan"
         mc:Ignorable="d"
-        Title="My Budget Planner" Height="500" Width="400"
+        Title="My Plan" Height="500" Width="400"
         Background="#f5f7fa" FontFamily="Segoe UI" FontSize="14">
 
     <Grid Margin="20" >
@@ -55,6 +55,9 @@
             <Button Content="Supprimer" Width="100" Padding="8"
                     Background="#F44336" Foreground="White" BorderThickness="0" 
                     Cursor="Hand" Click="Supprimer_Click"/>
+            <Button Content="Menu principal" Width="180" Padding="8"
+                    Background="#2196F3" Foreground="White" BorderThickness="0"
+                    Cursor="Hand" Click="OpenMainMenu_Click" Margin="10,0,0,0"/>
         </StackPanel>
 
         <!-- Solde -->

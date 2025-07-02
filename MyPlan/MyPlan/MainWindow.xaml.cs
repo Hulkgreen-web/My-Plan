@@ -107,5 +107,12 @@ namespace MyPlan
             ChargerTransactions();
         }
 
+        private void OpenMainMenu_Click(object sender, RoutedEventArgs e)
+        {
+            Accueil mainWindow = new Accueil();
+            mainWindow.Show();
+            this.Close();
+        }
+
     }
 }
