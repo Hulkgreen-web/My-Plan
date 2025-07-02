@@ -1,0 +1,71 @@
+﻿<Window x:Class="MyPlan.MainWindow"
+        Loaded="Window_Loaded"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyPlan"
+        mc:Ignorable="d"
+        Title="My Budget Planner" Height="500" Width="400"
+        Background="#f5f7fa" FontFamily="Segoe UI" FontSize="14">
+
+    <Grid Margin="20" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <!-- Form -->
+            <RowDefinition Height="Auto" />
+            <!-- Boutons -->
+            <RowDefinition Height="Auto" />
+            <!-- Solde -->
+            <RowDefinition Height="*" />
+            <!-- Liste -->
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Formulaire -->
+        <StackPanel Grid.Row="0" Margin="0 0 0 10" >
+
+            <!-- Description avec placeholder -->
+            <Grid Margin="0,0,0,8">
+                <TextBox x:Name="DescriptionBox" Padding="8" Background="White" BorderBrush="#ccc" BorderThickness="1"
+                         Foreground="#333"/>
+                <TextBlock Text="Description" Margin="12,0,0,0" Foreground="#999" VerticalAlignment="Center" IsHitTestVisible="False"
+                           x:Name="PlaceholderDescription"/>
+            </Grid>
+
+            <!-- Montant avec placeholder -->
+            <Grid Margin="0,0,0,8">
+                <TextBox x:Name="MontantBox" Padding="8" Background="White" BorderBrush="#ccc" BorderThickness="1"
+                         Foreground="#333"/>
+                <TextBlock Text="Montant (€)" Margin="12,0,0,0" Foreground="#999" VerticalAlignment="Center" IsHitTestVisible="False"
+                           x:Name="PlaceholderMontant"/>
+            </Grid>
+
+            <CheckBox x:Name="EstRevenuCheck" Content="Revenu" Margin="0,0,0,8"
+                      Foreground="#444" FontWeight="SemiBold"/>
+        </StackPanel>
+
+        <!-- Boutons -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,15" >
+            <Button Content="Ajouter" Width="100" Margin="0,0,10,0" Padding="8"
+                    Background="#4CAF50" Foreground="White" BorderThickness="0" 
+                    Cursor="Hand" Click="Ajouter_Click"/>
+            <Button Content="Supprimer" Width="100" Padding="8"
+                    Background="#F44336" Foreground="White" BorderThickness="0" 
+                    Cursor="Hand" Click="Supprimer_Click"/>
+        </StackPanel>
+
+        <!-- Solde -->
+        <TextBlock x:Name="SoldeText" Grid.Row="2"
+                   FontWeight="Bold" FontSize="16"
+                   HorizontalAlignment="Right" Foreground="#222"
+                   Margin="0,0,0,10"/>
+
+        <!-- Liste des transactions -->
+        <ListBox x:Name="ListeTransactions" Grid.Row="3" 
+                 Background="White" BorderBrush="#ccc" BorderThickness="1"
+                 Padding="5" />
+    </Grid>
+</Window>
