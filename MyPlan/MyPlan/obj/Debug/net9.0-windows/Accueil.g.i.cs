@@ -52,7 +52,7 @@ namespace MyPlan {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/MyPlan;component/accueil.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/MyPlan;V1.0.0.0;component/accueil.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\Accueil.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

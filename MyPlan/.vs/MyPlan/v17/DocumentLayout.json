@@ -1,7 +1,16 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|c:\\users\\aboui\\desktop\\my plan\\myplan\\myplan\\models\\categorie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|solutionrelative:myplan\\models\\categorie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|c:\\users\\aboui\\desktop\\my plan\\myplan\\myplan\\models\\transaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|solutionrelative:myplan\\models\\transaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +18,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Categorie.cs",
+              "DocumentMoniker": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\models\\Categorie.cs",
+              "RelativeDocumentMoniker": "MyPlan\\models\\Categorie.cs",
+              "ToolTip": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\models\\Categorie.cs",
+              "RelativeToolTip": "MyPlan\\models\\Categorie.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T11:18:30.763Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Transaction.cs",
+              "DocumentMoniker": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\models\\Transaction.cs",
+              "RelativeDocumentMoniker": "MyPlan\\models\\Transaction.cs",
+              "ToolTip": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\models\\Transaction.cs",
+              "RelativeToolTip": "MyPlan\\models\\Transaction.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T11:08:20.988Z",
+              "EditorCaption": ""
             }
           ]
         }
