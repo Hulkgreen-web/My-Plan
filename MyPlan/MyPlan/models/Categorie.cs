@@ -12,9 +12,8 @@ namespace MyPlan.models
         public string Nom { get; set; }
         public ICollection<Transaction> Transactions { get; set; }
 
-        public Categorie(int id, string nom)
+        public Categorie(string nom)
         {
-            Id = id;
             Nom = nom;
             Transactions = new List<Transaction>();
         }

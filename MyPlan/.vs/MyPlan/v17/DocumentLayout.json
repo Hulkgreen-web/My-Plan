@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|c:\\users\\aboui\\desktop\\my plan\\myplan\\myplan\\models\\categorie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|solutionrelative:myplan\\models\\categorie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|c:\\users\\aboui\\desktop\\my plan\\myplan\\myplan\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|solutionrelative:myplan\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|c:\\users\\aboui\\desktop\\my plan\\myplan\\myplan\\models\\transaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|solutionrelative:myplan\\models\\transaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|c:\\users\\aboui\\desktop\\my plan\\myplan\\myplan\\accueil.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|solutionrelative:myplan\\accueil.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,27 +27,25 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Categorie.cs",
-              "DocumentMoniker": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\models\\Categorie.cs",
-              "RelativeDocumentMoniker": "MyPlan\\models\\Categorie.cs",
-              "ToolTip": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\models\\Categorie.cs",
-              "RelativeToolTip": "MyPlan\\models\\Categorie.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-04T11:18:30.763Z",
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "MyPlan\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\MainWindow.xaml",
+              "RelativeToolTip": "MyPlan\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-07-04T13:07:46.523Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Transaction.cs",
-              "DocumentMoniker": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\models\\Transaction.cs",
-              "RelativeDocumentMoniker": "MyPlan\\models\\Transaction.cs",
-              "ToolTip": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\models\\Transaction.cs",
-              "RelativeToolTip": "MyPlan\\models\\Transaction.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-04T11:08:20.988Z",
+              "Title": "Accueil.xaml",
+              "DocumentMoniker": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\Accueil.xaml",
+              "RelativeDocumentMoniker": "MyPlan\\Accueil.xaml",
+              "ToolTip": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\Accueil.xaml",
+              "RelativeToolTip": "MyPlan\\Accueil.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-07-04T13:06:48.563Z",
               "EditorCaption": ""
             }
           ]

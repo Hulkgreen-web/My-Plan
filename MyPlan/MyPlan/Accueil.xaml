@@ -1,7 +1,7 @@
 ﻿<Window x:Class="MyPlan.Accueil"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Accueil - My Budget Planner"
+        Title="Accueil - My Plan"
         Height="400" Width="600"
         Background="#f5f7fa"
         FontFamily="Segoe UI"
@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
 
         <!-- Titre -->
-        <TextBlock Text="Bienvenue dans My Budget Planner" 
+        <TextBlock Text="Bienvenue dans My Plan" 
                    FontSize="24" FontWeight="Bold" 
                    Foreground="#222"
                    HorizontalAlignment="Center"
