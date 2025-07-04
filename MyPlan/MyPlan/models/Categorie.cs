@@ -10,6 +10,7 @@ namespace MyPlan.models
     {
         public int Id { get; set; }
         public string Nom { get; set; }
+        public decimal montantEstime { get; set; }
         public ICollection<Transaction> Transactions { get; set; }
 
         public Categorie(string nom)

@@ -35,6 +35,13 @@ namespace MyPlan
                     ? Visibility.Visible
                     : Visibility.Collapsed;
             };
+
+            DateBox.TextChanged += (s, e) =>
+            {
+                PlaceholderDate.Visibility = string.IsNullOrEmpty(DateBox.Text)
+                    ? Visibility.Visible
+                    : Visibility.Collapsed;
+            };
         }
 
         private void Ajouter_Click(object sender, RoutedEventArgs e)
@@ -43,7 +50,7 @@ namespace MyPlan
             {
                 using var db = new BudgetContext();
 
-                var transaction = new Transaction(DescriptionBox.Text, montant, EstRevenuCheck.IsChecked ?? false);
+                var transaction = new Transaction(DescriptionBox.Text, montant, EstRevenuCheck.IsChecked ?? false,DateBox.Text);
 
                 if (CategorieComboBox.SelectedItem is Categorie selectedCategorie)
                 {
@@ -59,6 +66,7 @@ namespace MyPlan
                 db.SaveChanges();
             }
 
+            DateBox.Clear();
             DescriptionBox.Clear();
             MontantBox.Clear();
             EstRevenuCheck.IsChecked = false;
@@ -80,8 +88,9 @@ namespace MyPlan
             ListeTransactions.ItemsSource = transactions.Select(t => new
             {
                 Transaction = t,
-                Texte = $"{t.Date:dd/MM/yyyy} | {(t.EstRevenu ? "+" : "-")}{t.Montant}€ : {t.Description} " +
-                        $"{(t.CategorieTransaction != null ? "| Catégorie : " + t.CategorieTransaction.Nom : "")}"
+                Texte = $"{"Date : " + t.Date:dd/MM/yyyy} | {"Montant réel : " + (t.EstRevenu ? "+" : "-")}{t.Montant}€ | Description : {t.Description} " +
+                        $"{(t.CategorieTransaction != null ? "| Catégorie : " + t.CategorieTransaction.Nom : "")} " +
+                        $"{(t.CategorieTransaction != null ? "| Montant estimé : " + t.CategorieTransaction.montantEstime : "€")}"
             }).ToList();
 
             ListeTransactions.DisplayMemberPath = "Texte";
@@ -139,14 +148,39 @@ namespace MyPlan
 
         private void AjouterCategorie_Click(object sender, RoutedEventArgs e)
         {
-            var nom = Microsoft.VisualBasic.Interaction.InputBox("Nom de la nouvelle catégorie :", "Ajouter Catégorie", "");
+            string input = Microsoft.VisualBasic.Interaction.InputBox(
+                "Entrez le nom de la catégorie et le montant estimé mensuel séparés par '|'\n\nExemple : Alimentation | 250",
+                "Ajouter Catégorie", "");
 
-            if (!string.IsNullOrWhiteSpace(nom))
+            if (!string.IsNullOrWhiteSpace(input))
             {
+                var parts = input.Split('|');
+
+                if (parts.Length != 2)
+                {
+                    MessageBox.Show("Format invalide. Utilisez : NomCatégorie | Montant");
+                    return;
+                }
+
+                string nom = parts[0].Trim();
+                string montantStr = parts[1].Trim();
+
+                if (!decimal.TryParse(montantStr, out decimal montantEstime))
+                {
+                    MessageBox.Show("Montant estimé invalide.");
+                    return;
+                }
+
                 using var db = new BudgetContext();
+
                 if (!db.Categories.Any(c => c.Nom.ToLower() == nom.ToLower()))
                 {
-                    db.Categories.Add(new Categorie(nom));
+                    var nouvelleCategorie = new Categorie(nom)
+                    {
+                        montantEstime = montantEstime
+                    };
+
+                    db.Categories.Add(nouvelleCategorie);
                     db.SaveChanges();
                     ChargerCategories();
                 }
@@ -156,6 +190,8 @@ namespace MyPlan
                 }
             }
         }
+
+
 
 
     }

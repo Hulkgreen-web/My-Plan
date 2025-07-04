@@ -25,6 +25,13 @@
 
             <!-- Description -->
             <Grid Margin="0,0,0,8">
+                <TextBox x:Name="DateBox" Padding="8" Background="White" BorderBrush="#ccc" BorderThickness="1"
+             Foreground="#333" ToolTip="Saisissez la date (XX/XX/XXXX)."/>
+                <TextBlock Text="Date" Margin="12,0,0,0" Foreground="#999" VerticalAlignment="Center" IsHitTestVisible="False"
+               x:Name="PlaceholderDate"/>
+            </Grid>
+            
+            <Grid Margin="0,0,0,8">
                 <TextBox x:Name="DescriptionBox" Padding="8" Background="White" BorderBrush="#ccc" BorderThickness="1"
                          Foreground="#333" ToolTip="Saisissez une brève description de la transaction."/>
                 <TextBlock Text="Description" Margin="12,0,0,0" Foreground="#999" VerticalAlignment="Center" IsHitTestVisible="False"
