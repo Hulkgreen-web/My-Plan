@@ -36,5 +36,12 @@ namespace MyPlan
         {
             Application.Current.Shutdown();
         }
+
+        private void OuvrirRevenus_Click(object sender, RoutedEventArgs e)
+        {
+            RevenueView revenueView = new RevenueView();
+            revenueView.Show();
+            this.Close();
+        }
     }
 }

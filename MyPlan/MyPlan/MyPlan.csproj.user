@@ -5,5 +5,8 @@
     <Compile Update="Accueil.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="RevenueView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

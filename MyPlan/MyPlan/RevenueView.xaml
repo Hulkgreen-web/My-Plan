@@ -1,0 +1,56 @@
+﻿<Window x:Class="MyPlan.RevenueView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Revenus" Height="500" Width="700"
+        Loaded="Window_Loaded"
+        Background="#f5f7fa">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Barre de filtre + Accueil -->
+        <DockPanel LastChildFill="False" Margin="0,0,0,10">
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                <TextBlock Text="Filtrer par catégorie :" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <ComboBox x:Name="CategorieFilterComboBox" Width="200"
+                          DisplayMemberPath="Nom"
+                          SelectedValuePath="Id"
+                          SelectionChanged="CategorieFilterComboBox_SelectionChanged"/>
+                <Button Content="Réinitialiser" Margin="10,0,0,0" Click="ResetFilter_Click"/>
+            </StackPanel>
+            <Button Content="Accueil" DockPanel.Dock="Right"
+                    Background="#2196F3" Foreground="White"
+                    Padding="6,4" Margin="10,0,0,0"
+                    Click="RetourAccueil_Click"/>
+        </DockPanel>
+
+        <!-- DataGrid des revenus -->
+        <DataGrid x:Name="ListeRevenus" Grid.Row="1"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False" CanUserDeleteRows="False"
+                  Margin="0,0,0,10" IsReadOnly="False"
+                  RowEditEnding="ListeRevenus_RowEditEnding"
+                  ItemsSource="{Binding RevenuList, RelativeSource={RelativeSource AncestorType=Window}}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat=dd/MM/yyyy}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Montant (€)" Binding="{Binding Montant}" />
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
+                <DataGridComboBoxColumn Header="Catégorie"
+                                        SelectedValueBinding="{Binding CategorieTransaction.Id, Mode=TwoWay}"
+                                        SelectedValuePath="Id"
+                                        DisplayMemberPath="Nom"
+                                        ItemsSource="{Binding CategorieList, RelativeSource={RelativeSource AncestorType=Window}}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Bouton Enregistrer -->
+        <Button Grid.Row="2" Content="Enregistrer les modifications"
+                Background="#4CAF50" Foreground="White"
+                Padding="8" Click="Enregistrer_Click"
+                HorizontalAlignment="Right"/>
+    </Grid>
+</Window>

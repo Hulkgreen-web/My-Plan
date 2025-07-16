@@ -146,3 +146,5 @@ C:\Users\aboui\Desktop\My Plan\MyPlan\MyPlan\obj\Debug\net9.0-windows\ref\MyPlan
 C:\Users\aboui\Desktop\My Plan\MyPlan\MyPlan\obj\Debug\net9.0-windows\Accueil.g.cs
 C:\Users\aboui\Desktop\My Plan\MyPlan\MyPlan\obj\Debug\net9.0-windows\Accueil.baml
 C:\Users\aboui\Desktop\My Plan\MyPlan\MyPlan\obj\Debug\net9.0-windows\MyPlan.sourcelink.json
+C:\Users\aboui\Desktop\My Plan\MyPlan\MyPlan\obj\Debug\net9.0-windows\RevenueView.baml
+C:\Users\aboui\Desktop\My Plan\MyPlan\MyPlan\obj\Debug\net9.0-windows\RevenueView.g.cs
