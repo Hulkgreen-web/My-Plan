@@ -11,16 +11,8 @@
       "RelativeMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|solutionrelative:myplan\\revenueview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|c:\\users\\aboui\\desktop\\my plan\\myplan\\myplan\\accueil.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|solutionrelative:myplan\\accueil.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|c:\\users\\aboui\\desktop\\my plan\\myplan\\myplan\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|solutionrelative:myplan\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|c:\\users\\aboui\\desktop\\my plan\\myplan\\myplan\\accueil.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|solutionrelative:myplan\\accueil.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|c:\\users\\aboui\\desktop\\my plan\\myplan\\myplan\\models\\categorie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|solutionrelative:myplan\\models\\categorie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,40 +30,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\MainWindow.xaml.cs",
-              "RelativeDocumentMoniker": "MyPlan\\MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\MainWindow.xaml.cs",
-              "RelativeToolTip": "MyPlan\\MainWindow.xaml.cs",
-              "ViewState": "AgIAAB8AAAAAAAAAAAAQwFsAAABvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-16T09:39:29.889Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Accueil.xaml",
-              "DocumentMoniker": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\Accueil.xaml",
-              "RelativeDocumentMoniker": "MyPlan\\Accueil.xaml",
-              "ToolTip": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\Accueil.xaml",
-              "RelativeToolTip": "MyPlan\\Accueil.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-07-16T08:53:32.73Z",
+              "Title": "Categorie.cs",
+              "DocumentMoniker": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\models\\Categorie.cs",
+              "RelativeDocumentMoniker": "MyPlan\\models\\Categorie.cs",
+              "ToolTip": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\models\\Categorie.cs",
+              "RelativeToolTip": "MyPlan\\models\\Categorie.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAwAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-18T09:15:48.022Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Accueil.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\Accueil.xaml.cs",
-              "RelativeDocumentMoniker": "MyPlan\\Accueil.xaml.cs",
-              "ToolTip": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\Accueil.xaml.cs",
-              "RelativeToolTip": "MyPlan\\Accueil.xaml.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAQwCcAAAAoAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "RevenueView.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\RevenueView.xaml.cs",
+              "RelativeDocumentMoniker": "MyPlan\\RevenueView.xaml.cs",
+              "ToolTip": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\RevenueView.xaml.cs",
+              "RelativeToolTip": "MyPlan\\RevenueView.xaml.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAkwI8AAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-16T08:51:16.858Z",
+              "WhenOpened": "2025-07-18T08:45:13.344Z",
               "EditorCaption": ""
             },
             {
@@ -83,20 +63,7 @@
               "ToolTip": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\RevenueView.xaml",
               "RelativeToolTip": "MyPlan\\RevenueView.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-07-16T08:20:22.24Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "RevenueView.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\RevenueView.xaml.cs",
-              "RelativeDocumentMoniker": "MyPlan\\RevenueView.xaml.cs",
-              "ToolTip": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\RevenueView.xaml.cs",
-              "RelativeToolTip": "MyPlan\\RevenueView.xaml.cs",
-              "ViewState": "AgIAAG4AAAAAAAAAAAAAwIsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-16T08:16:43.416Z",
+              "WhenOpened": "2025-07-18T08:41:35.203Z",
               "EditorCaption": ""
             }
           ]
