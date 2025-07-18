@@ -1,6 +1,7 @@
 ﻿<Window x:Class="MyPlan.RevenueView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         Title="Revenus" Height="700" Width="1000"
         Loaded="Window_Loaded"
         Background="#f5f7fa">
@@ -8,12 +9,15 @@
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <!-- Barre de filtre -->
             <RowDefinition Height="*"/>
+            <!-- Contenu principal -->
             <RowDefinition Height="Auto"/>
+            <!-- Bouton enregistrer -->
         </Grid.RowDefinitions>
 
         <!-- Barre de filtre + Accueil -->
-        <DockPanel LastChildFill="False" Margin="0,0,0,10">
+        <DockPanel Grid.Row="0" LastChildFill="False" Margin="0,0,0,10">
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
                 <TextBlock Text="Filtrer par catégorie :" VerticalAlignment="Center" Margin="0,0,10,0"/>
                 <ComboBox x:Name="CategorieFilterComboBox" Width="200"
@@ -28,38 +32,61 @@
                     Click="RetourAccueil_Click"/>
         </DockPanel>
 
-        <!-- DataGrid des revenus -->
-        <DataGrid x:Name="ListeRevenus" Grid.Row="1"
-                  AutoGenerateColumns="False"
-                  CanUserAddRows="False" CanUserDeleteRows="False"
-                  Margin="0,0,0,10" IsReadOnly="False"
-                  RowEditEnding="ListeRevenus_RowEditEnding"
-                  ItemsSource="{Binding RevenuList, RelativeSource={RelativeSource AncestorType=Window}}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat=dd/MM/yyyy}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
-                <DataGridTemplateColumn Header="Catégorie">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding CategorieTransaction.Nom}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                    <DataGridTemplateColumn.CellEditingTemplate>
-                        <DataTemplate>
-                            <ComboBox ItemsSource="{Binding DataContext.CategorieList, RelativeSource={RelativeSource AncestorType=Window}}"
-                                      DisplayMemberPath="Nom"
-                                      SelectedValuePath="Id"
-                                      SelectedValue="{Binding CategorieTransaction.Id, Mode=TwoWay}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellEditingTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Montant estimé" Binding="{Binding CategorieTransaction.montantEstime}" IsReadOnly="True" />
-                <DataGridTextColumn Header="Montant (€)" Binding="{Binding Montant}" />
-            </DataGrid.Columns>
-        </DataGrid>
+        <!-- Contenu principal : DataGrid + Graphique -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <!-- DataGrid -->
+                <ColumnDefinition Width="2*"/>
+                <!-- PieChart -->
+            </Grid.ColumnDefinitions>
+
+            <!-- DataGrid des revenus -->
+            <DataGrid x:Name="ListeRevenus"
+                      Grid.Column="0"
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="False" CanUserDeleteRows="False"
+                      Margin="0,0,10,0"
+                      IsReadOnly="False"
+                      RowEditEnding="ListeRevenus_RowEditEnding"
+                      ItemsSource="{Binding RevenuList, RelativeSource={RelativeSource AncestorType=Window}}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat=dd/MM/yyyy}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
+                    <DataGridTemplateColumn Header="Catégorie">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding CategorieTransaction.Nom}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                <ComboBox ItemsSource="{Binding DataContext.CategorieList, RelativeSource={RelativeSource AncestorType=Window}}"
+                                          DisplayMemberPath="Nom"
+                                          SelectedValuePath="Id"
+                                          SelectedValue="{Binding CategorieTransaction.Id, Mode=TwoWay}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Montant estimé" Binding="{Binding CategorieTransaction.montantEstime}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Montant (€)" Binding="{Binding Montant}" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!-- Graphique en camembert -->
+            <lvc:PieChart x:Name="PieChartRevenus"
+                          Grid.Column="1"
+                          LegendLocation="Bottom"
+                          InnerRadius="40"
+                          Margin="10,0,0,0"
+                          Foreground="#333"
+                          FontSize="14"
+                          FontWeight="SemiBold"/>
+        </Grid>
 
         <!-- Bouton Enregistrer -->
-        <Button Grid.Row="2" Content="Enregistrer les modifications"
+        <Button Grid.Row="2"
+                Content="Enregistrer les modifications"
                 Background="#4CAF50" Foreground="White"
                 Padding="8" Click="Enregistrer_Click"
                 HorizontalAlignment="Right"/>

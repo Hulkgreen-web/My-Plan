@@ -6,6 +6,11 @@ using System.Windows;
 using System.Windows.Controls;
 using Microsoft.EntityFrameworkCore;
 using MyPlan.models;
+using LiveCharts;
+using LiveCharts.Wpf;
+using LiveCharts.Defaults;
+using System.Windows.Media;
+
 
 namespace MyPlan
 {
@@ -24,6 +29,7 @@ namespace MyPlan
         {
             ChargerCategories();
             ChargerRevenus();
+            MettreAJourGraphique();
             DataContext = this; // Pour permettre le binding dans la DataGrid
         }
 
@@ -54,7 +60,41 @@ namespace MyPlan
 
             RevenuList = query.OrderByDescending(t => t.Date).ToList();
             ListeRevenus.ItemsSource = RevenuList;
+            MettreAJourGraphique();
         }
+
+        private void MettreAJourGraphique()
+        {
+            if (RevenuList == null || RevenuList.Count == 0)
+            {
+                PieChartRevenus.Series = new SeriesCollection(); // Vide si aucun revenu
+                return;
+            }
+
+            var seriesCollection = new SeriesCollection();
+
+            var grouped = RevenuList
+                .Where(r => r.CategorieTransaction != null)
+                .GroupBy(r => r.CategorieTransaction.Nom)
+                .Select(g => new
+                {
+                    Categorie = g.Key,
+                    MontantTotal = g.Sum(t => t.Montant)
+                });
+
+            foreach (var group in grouped)
+            {
+                seriesCollection.Add(new PieSeries
+                {
+                    Title = group.Categorie,
+                    Values = new ChartValues<ObservableValue> { new ObservableValue((double)group.MontantTotal) },
+                    DataLabels = true
+                });
+            }
+
+            PieChartRevenus.Series = seriesCollection;
+        }
+
 
         //Fonction permettant d'éditer tous les champs d'un revenu 
         private void ListeRevenus_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)

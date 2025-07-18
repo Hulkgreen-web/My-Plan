@@ -7,7 +7,7 @@
         FontFamily="Segoe UI"
         FontSize="14">
 
-    <Grid Margin="30">
+    <Grid Margin="30,30,30,7">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*" />
@@ -21,28 +21,40 @@
                    Margin="0,0,0,20"/>
 
         <!-- Contenu principal -->
-        <StackPanel Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Width="400">
+        <StackPanel Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Width="484">
             <TextBlock Text="Gérez facilement vos revenus et dépenses." 
-                       FontSize="16" Margin="0,0,0,15" TextAlignment="Center"/>
+                       FontSize="16" Margin="0,0,0,25" TextAlignment="Center"/>
 
             <Button Content="Commencer à gérer mon budget" 
                     Width="250" Height="40" 
                     Background="#4CAF50" Foreground="White" 
                     FontWeight="SemiBold"
+                    Margin="0,0,0,15"
                     Cursor="Hand"
                     Click="StartBudget_Click"/>
-            <Button Content="Viisualiser les revenus" 
-                Margin="20"
-                Width="250" Height="40" 
-                Background="#2596be" Foreground="White" 
-                FontWeight="SemiBold"
-                Cursor="Hand"
-                Click="OuvrirRevenus_Click"/>
+
+            <Button Content="Visualiser les revenus" 
+                    Width="250" Height="40" 
+                    Background="#2596be" Foreground="White" 
+                    FontWeight="SemiBold"
+                    Margin="0,0,0,15"
+                    Cursor="Hand"
+                    Click="OuvrirRevenus_Click"/>
+
+            <Button Content="Visualiser les dépenses"
+                    Width="250" Height="40" 
+                    Background="#68d6bd" Foreground="White" 
+                    FontWeight="SemiBold"
+                    Margin="0,0,0,15"
+                    Cursor="Hand"
+                    Click="OuvrirDepenses_Click"/>
+
             <Button Content="Quitter"
                     Width="250" Height="40"
                     Background="#F44336" Foreground="White" 
                     FontWeight="SemiBold"
                     Cursor="Hand"
+                    Margin="0,0,0,0"
                     Click="Quit_Click"/>
         </StackPanel>
     </Grid>

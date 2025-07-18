@@ -43,5 +43,12 @@ namespace MyPlan
             revenueView.Show();
             this.Close();
         }
+
+        private void OuvrirDepenses_Click(object sender, RoutedEventArgs e)
+        {
+            DepenseView depenseView = new DepenseView();
+            depenseView.Show();
+            this.Close();
+        }
     }
 }
