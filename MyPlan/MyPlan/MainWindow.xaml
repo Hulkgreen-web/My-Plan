@@ -80,6 +80,7 @@
                     Background="#2196F3" Foreground="White" BorderThickness="0"
                     Cursor="Hand" Click="OpenMainMenu_Click" Margin="10,0,0,0"
                     ToolTip="Retourner à l’écran d’accueil."/>
+            <Button Content="Voir dépenses mensuelles" Click="OuvrirDepensesMensuelles_Click" Margin="10"/>
         </StackPanel>
 
         <!-- Solde -->

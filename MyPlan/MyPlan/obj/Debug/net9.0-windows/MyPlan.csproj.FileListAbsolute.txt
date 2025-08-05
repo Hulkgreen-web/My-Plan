@@ -152,3 +152,5 @@ C:\Users\aboui\Desktop\My Plan\MyPlan\MyPlan\obj\Debug\net9.0-windows\DepenseVie
 C:\Users\aboui\Desktop\My Plan\MyPlan\MyPlan\obj\Debug\net9.0-windows\DepenseView.g.cs
 C:\Users\aboui\Desktop\My Plan\MyPlan\MyPlan\bin\Debug\net9.0-windows\LiveCharts.dll
 C:\Users\aboui\Desktop\My Plan\MyPlan\MyPlan\bin\Debug\net9.0-windows\LiveCharts.Wpf.dll
+C:\Users\aboui\Desktop\My Plan\MyPlan\MyPlan\obj\Debug\net9.0-windows\DepensesMensuellesView.baml
+C:\Users\aboui\Desktop\My Plan\MyPlan\MyPlan\obj\Debug\net9.0-windows\DepensesMensuellesView.g.cs

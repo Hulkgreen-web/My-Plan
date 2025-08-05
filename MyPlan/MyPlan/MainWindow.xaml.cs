@@ -191,8 +191,11 @@ namespace MyPlan
             }
         }
 
-
-
+        private void OuvrirDepensesMensuelles_Click(object sender, RoutedEventArgs e)
+        {
+            var fenetre = new DepensesMensuellesView();
+            fenetre.Show();
+        }
 
     }
 }

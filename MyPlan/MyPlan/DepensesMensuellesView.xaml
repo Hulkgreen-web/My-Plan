@@ -1,0 +1,42 @@
+﻿<Window x:Class="MyPlan.DepensesMensuellesView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        Title="Dépenses Mensuelles" Height="500" Width="900"
+        Loaded="Window_Loaded">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Filtres -->
+        <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBlock Text="Mois :" VerticalAlignment="Center"/>
+            <ComboBox x:Name="MoisComboBox" Width="100" SelectionChanged="ComboBoxDate_SelectionChanged" Margin="5,0"/>
+            <TextBlock Text="Année :" VerticalAlignment="Center" Margin="10,0,0,0"/>
+            <ComboBox x:Name="AnneeComboBox" Width="100" SelectionChanged="ComboBoxDate_SelectionChanged" Margin="5,0"/>
+        </StackPanel>
+
+        <!-- DataGrid -->
+        <DataGrid x:Name="DepensesParCategorieDataGrid" Grid.Row="1" Grid.Column="0"
+                  AutoGenerateColumns="False" IsReadOnly="True" Margin="0,0,10,0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Catégorie" Binding="{Binding Nom}" Width="*"/>
+                <DataGridTextColumn Header="Montant estimé (€)" Binding="{Binding MontantEstime}" Width="*"/>
+                <DataGridTextColumn Header="Montant réel (€)" Binding="{Binding MontantReel}" Width="*"/>
+                <DataGridTextColumn Header="Écart (€)" Binding="{Binding Ecart}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Graphique -->
+        <lvc:PieChart x:Name="DepensesPieChart" Grid.Row="1" Grid.Column="1"
+                      LegendLocation="Bottom" InnerRadius="20" />
+    </Grid>
+</Window>
