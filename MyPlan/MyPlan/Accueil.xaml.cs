@@ -32,9 +32,11 @@ namespace MyPlan
             this.Close();
         }
 
-        private void Quit_Click(object sender, RoutedEventArgs e)
+        private void OuvrirEpargnes_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            EpargneView epargneView = new EpargneView();
+            epargneView.Show();
+            this.Close();
         }
 
         private void OuvrirRevenus_Click(object sender, RoutedEventArgs e)

@@ -49,7 +49,7 @@ namespace MyPlan
 
             // Années (exemple : de 2022 à l'année actuelle)
             int currentYear = DateTime.Now.Year;
-            var annees = Enumerable.Range(currentYear - 3, 5).ToList();
+            var annees = Enumerable.Range(currentYear - 3, 80).ToList();
             AnneeComboBox.ItemsSource = annees;
 
             // Pré-sélection mois et année actuels

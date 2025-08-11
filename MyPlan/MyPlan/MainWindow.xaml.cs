@@ -197,5 +197,18 @@ namespace MyPlan
             fenetre.Show();
         }
 
+        private void OuvrirRevenusMensuels_Click(object sender, RoutedEventArgs e)
+        {
+            var fenetre = new RevenuMensuelView();
+            fenetre.Show();
+        }
+
+        private void EditerCategorie_Click(object sender, RoutedEventArgs e)
+        {
+            var fenetre = new CategorieEditView();
+            fenetre.Show();
+            this.Close();
+        }
+
     }
 }

@@ -4,10 +4,87 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MyPlan"
         mc:Ignorable="d"
-        Title="My Plan" Height="500" Width="800"
-        Background="#f5f7fa" FontFamily="Segoe UI" FontSize="14">
+        Title="My Plan" Height="550" Width="850"
+        Background="#FFF9F5" FontFamily="Georgia" FontSize="14"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <!-- Style pour les TextBox avec coins arrondis -->
+        <Style TargetType="TextBox" x:Key="RoundedTextBox">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#FFCC80"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Foreground" Value="#333"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="4">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Style pour les ComboBox avec coins arrondis -->
+        <Style TargetType="ComboBox" x:Key="RoundedComboBox">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#FFCC80"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <Border x:Name="border" 
+                                    Background="{TemplateBinding Background}" 
+                                    BorderBrush="{TemplateBinding BorderBrush}" 
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="4"/>
+                            <ToggleButton x:Name="toggleButton" 
+                                          Background="Transparent" 
+                                          BorderThickness="0"
+                                          IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <ContentPresenter x:Name="contentSite" 
+                                            Content="{TemplateBinding SelectionBoxItem}"
+                                            Margin="{TemplateBinding Padding}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Style pour les boutons -->
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" 
+                                Background="{TemplateBinding Background}" 
+                                CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Opacity" Value="0.9"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
 
     <Grid Margin="20">
         <Grid.RowDefinitions>
@@ -16,34 +93,44 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+
+        <!-- En-tête orange -->
+        <Border Grid.Row="0" Grid.ColumnSpan="2" Background="#FFA726" Padding="10" Margin="0,0,0,15">
+            <TextBlock Text="Nouvelle Transaction" 
+                       FontSize="20" 
+                       FontWeight="Bold" 
+                       Foreground="White"
+                       HorizontalAlignment="Center"
+                       FontFamily="Verdana"/>
+        </Border>
 
         <!-- Formulaire -->
-        <StackPanel Grid.Row="0" Margin="0 0 0 10">
+        <StackPanel Grid.Row="1" Margin="0,0,0,15">
+            <!-- Date -->
+            <Grid Margin="0,0,0,10">
+                <TextBox x:Name="DateBox" Style="{StaticResource RoundedTextBox}"
+                         ToolTip="Saisissez la date (XX/XX/XXXX)."/>
+                <TextBlock Text="Date" Margin="15,0,0,0" Foreground="#999" 
+                           VerticalAlignment="Center" IsHitTestVisible="False"
+                           x:Name="PlaceholderDate" FontStyle="Italic"/>
+            </Grid>
 
             <!-- Description -->
-            <Grid Margin="0,0,0,8">
-                <TextBox x:Name="DateBox" Padding="8" Background="White" BorderBrush="#ccc" BorderThickness="1"
-             Foreground="#333" ToolTip="Saisissez la date (XX/XX/XXXX)."/>
-                <TextBlock Text="Date" Margin="12,0,0,0" Foreground="#999" VerticalAlignment="Center" IsHitTestVisible="False"
-               x:Name="PlaceholderDate"/>
-            </Grid>
-            
-            <Grid Margin="0,0,0,8">
-                <TextBox x:Name="DescriptionBox" Padding="8" Background="White" BorderBrush="#ccc" BorderThickness="1"
-                         Foreground="#333" ToolTip="Saisissez une brève description de la transaction."/>
-                <TextBlock Text="Description" Margin="12,0,0,0" Foreground="#999" VerticalAlignment="Center" IsHitTestVisible="False"
-                           x:Name="PlaceholderDescription"/>
+            <Grid Margin="0,0,0,10">
+                <TextBox x:Name="DescriptionBox" Style="{StaticResource RoundedTextBox}"
+                         ToolTip="Saisissez une brève description de la transaction."/>
+                <TextBlock Text="Description" Margin="15,0,0,0" Foreground="#999" 
+                           VerticalAlignment="Center" IsHitTestVisible="False"
+                           x:Name="PlaceholderDescription" FontStyle="Italic"/>
             </Grid>
 
             <!-- Montant -->
-            <Grid Margin="0,0,0,8">
-                <TextBox x:Name="MontantBox" Padding="8" Background="White" BorderBrush="#ccc" BorderThickness="1"
-                         Foreground="#333" ToolTip="Saisissez un montant numérique. Utilisez une virgule si nécessaire."/>
-                <TextBlock Text="Montant (€)" Margin="12,0,0,0" Foreground="#999" VerticalAlignment="Center" IsHitTestVisible="False"
-                           x:Name="PlaceholderMontant"/>
+            <Grid Margin="0,0,0,10">
+                <TextBox x:Name="MontantBox" Style="{StaticResource RoundedTextBox}"
+                         ToolTip="Saisissez un montant numérique. Utilisez une virgule si nécessaire."/>
+                <TextBlock Text="Montant (€)" Margin="15,0,0,0" Foreground="#999" 
+                           VerticalAlignment="Center" IsHitTestVisible="False"
+                           x:Name="PlaceholderMontant" FontStyle="Italic"/>
             </Grid>
 
             <!-- Catégorie -->
@@ -58,40 +145,57 @@
                         FontWeight="Bold" FontSize="16" 
                         Cursor="Hand" Click="AjouterCategorie_Click" HorizontalAlignment="Right"
                         ToolTip="Cliquez pour ajouter une nouvelle catégorie."/>
+
+                <Button Content="Editer catégorie" Width="150" Height="30" 
+                        Margin="10,0,50,0"
+                        Background="#FFC107" Foreground="White" 
+                        FontWeight="Bold" FontSize="16" 
+                        Cursor="Hand" Click="EditerCategorie_Click" HorizontalAlignment="Right"
+                        ToolTip="Cliquez pour modifier une catégorie."/>
             </Grid>
 
             <!-- Revenu -->
-            <CheckBox x:Name="EstRevenuCheck" Content="Revenu" Margin="0,0,0,8"
-                      Foreground="#444" FontWeight="SemiBold"
-                      ToolTip="Cochez si c’est un revenu. Décochez pour une dépense."/>
+            <CheckBox x:Name="EstRevenuCheck" Content="Revenu" Margin="0,10,0,0"
+                      Foreground="#E65100" FontWeight="Bold"
+                      ToolTip="Cochez si c'est un revenu. Décochez pour une dépense."/>
         </StackPanel>
 
         <!-- Boutons -->
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,15">
-            <Button Content="Ajouter" Width="100" Margin="0,0,10,0" Padding="8"
-                    Background="#4CAF50" Foreground="White" BorderThickness="0" 
-                    Cursor="Hand" Click="Ajouter_Click"
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20">
+            <Button Content="Ajouter" Width="120" Height="38" Margin="0,0,10,0" Padding="8"
+                    Background="#FB8C00" Click="Ajouter_Click"
                     ToolTip="Cliquez pour enregistrer la transaction."/>
-            <Button Content="Supprimer" Width="100" Padding="8"
-                    Background="#F44336" Foreground="White" BorderThickness="0" 
-                    Cursor="Hand" Click="Supprimer_Click"
+
+            <Button Content="Supprimer" Width="120" Height="38" Padding="8"
+                    Background="#BF360C" Click="Supprimer_Click"
                     ToolTip="Supprime la transaction sélectionnée dans la liste."/>
-            <Button Content="Menu principal" Width="180" Padding="8"
-                    Background="#2196F3" Foreground="White" BorderThickness="0"
-                    Cursor="Hand" Click="OpenMainMenu_Click" Margin="10,0,0,0"
-                    ToolTip="Retourner à l’écran d’accueil."/>
-            <Button Content="Voir dépenses mensuelles" Click="OuvrirDepensesMensuelles_Click" Margin="10"/>
+
+            <Button Content="Menu principal" Width="150" Height="38" Padding="8"
+                    Background="#FFB74D" Click="OpenMainMenu_Click" Margin="10,0,0,0"
+                    ToolTip="Retourner à l'écran d'accueil."/>
+
+            <Button Content="Voir dépenses mensuelles" Width="200" Height="38" Padding="8"
+                    Background="#FFCC80" Click="OuvrirDepensesMensuelles_Click" Margin="10,0,0,0"/>
+            
+            <Button Content="Voir revenus mensuels" Width="200" Height="38" Padding="8"
+                    Background="#FB8C00" Click="OuvrirRevenusMensuels_Click" Margin="10,0,0,0"/>
         </StackPanel>
 
         <!-- Solde -->
-        <TextBlock x:Name="SoldeText" Grid.Row="2"
-                   FontWeight="Bold" FontSize="16"
-                   HorizontalAlignment="Right" Foreground="#222"
-                   Margin="0,0,0,10" ToolTip="Solde actuel (revenus - dépenses)"/>
+        <Border Grid.Row="3" Background="#FFE0B2" Padding="10" Margin="0,0,0,10">
+            <TextBlock x:Name="SoldeText" 
+                       FontWeight="Bold" FontSize="18"
+                       HorizontalAlignment="Right" Foreground="#BF360C"
+                       ToolTip="Solde actuel (revenus - dépenses)"/>
+        </Border>
 
         <!-- Liste des transactions -->
-        <ListBox x:Name="ListeTransactions" Grid.Row="3" 
-                 Background="White" BorderBrush="#ccc" BorderThickness="1"
-                 Padding="5" ToolTip="Historique des transactions. Cliquez pour en sélectionner une."/>
+        <Border Grid.Row="4" Background="White" BorderBrush="#FFCC80" BorderThickness="1">
+            <ListBox x:Name="ListeTransactions" 
+                     Background="Transparent" BorderThickness="0"
+                     Padding="5" FontFamily="Segoe UI"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto"
+                     ToolTip="Historique des transactions. Cliquez pour en sélectionner une."/>
+        </Border>
     </Grid>
 </Window>

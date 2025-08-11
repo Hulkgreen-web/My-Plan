@@ -14,5 +14,14 @@
     <Compile Update="DepensesMensuellesView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="RevenuMensuelView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="EpargneView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="CategorieEditView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

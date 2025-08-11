@@ -2,60 +2,112 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Accueil - My Plan"
-        Height="400" Width="600"
-        Background="#f5f7fa"
-        FontFamily="Segoe UI"
-        FontSize="14">
+        Height="450" Width="650"
+        Background="#FFF9F5"
+        FontFamily="Georgia"
+        FontSize="14"
+        WindowStartupLocation="CenterScreen">
 
-    <Grid Margin="30,30,30,7">
+    <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*" />
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Titre -->
-        <TextBlock Text="Bienvenue dans My Plan" 
-                   FontSize="24" FontWeight="Bold" 
-                   Foreground="#222"
-                   HorizontalAlignment="Center"
-                   Margin="0,0,0,20"/>
+        <!-- En-tête avec dégradé orange -->
+        <Border Grid.Row="0" Background="#FFA726" CornerRadius="6" Padding="15" Margin="0,0,0,25">
+            <TextBlock Text="My Plan" 
+                       FontSize="28" 
+                       FontWeight="Bold" 
+                       Foreground="White"
+                       HorizontalAlignment="Center"
+                       FontFamily="Verdana"/>
+        </Border>
 
         <!-- Contenu principal -->
-        <StackPanel Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Width="484">
-            <TextBlock Text="Gérez facilement vos revenus et dépenses." 
-                       FontSize="16" Margin="0,0,0,25" TextAlignment="Center"/>
+        <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="400">
+            <TextBlock Text="Gestion financière intuitive" 
+                       FontSize="18" 
+                       Margin="0,0,0,30" 
+                       TextAlignment="Center"
+                       Foreground="#E65100"/>
 
+            <!-- Boutons avec effets de survol -->
             <Button Content="Commencer à gérer mon budget" 
-                    Width="250" Height="40" 
-                    Background="#4CAF50" Foreground="White" 
-                    FontWeight="SemiBold"
+                    Width="280" Height="45" 
+                    Background="#FB8C00" 
+                    Foreground="White" 
+                    FontWeight="Bold"
+                    FontSize="15"
                     Margin="0,0,0,15"
+                    BorderThickness="0"
                     Cursor="Hand"
-                    Click="StartBudget_Click"/>
+                    Click="StartBudget_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}" CornerRadius="4">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#F57C00"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
 
             <Button Content="Visualiser les revenus" 
-                    Width="250" Height="40" 
-                    Background="#2596be" Foreground="White" 
-                    FontWeight="SemiBold"
+                    Width="280" Height="45" 
+                    Background="#FFB74D" 
+                    Foreground="White" 
+                    FontWeight="Bold"
+                    FontSize="15"
                     Margin="0,0,0,15"
+                    BorderThickness="0"
                     Cursor="Hand"
-                    Click="OuvrirRevenus_Click"/>
+                    Click="OuvrirRevenus_Click">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}"/>
+                </Button.Style>
+            </Button>
 
             <Button Content="Visualiser les dépenses"
-                    Width="250" Height="40" 
-                    Background="#68d6bd" Foreground="White" 
-                    FontWeight="SemiBold"
+                    Width="280" Height="45" 
+                    Background="#FFCC80" 
+                    Foreground="White" 
+                    FontWeight="Bold"
+                    FontSize="15"
                     Margin="0,0,0,15"
+                    BorderThickness="0"
                     Cursor="Hand"
-                    Click="OuvrirDepenses_Click"/>
+                    Click="OuvrirDepenses_Click">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}"/>
+                </Button.Style>
+            </Button>
 
-            <Button Content="Quitter"
-                    Width="250" Height="40"
-                    Background="#F44336" Foreground="White" 
-                    FontWeight="SemiBold"
-                    Cursor="Hand"
-                    Margin="0,0,0,0"
-                    Click="Quit_Click"/>
+            <Button Content="Gérer les épargnes"
+                Width="280" Height="45" 
+                Background="#BF360C" 
+                Foreground="White" 
+                FontWeight="Bold"
+                FontSize="15"
+                Margin="0,0,0,15"
+                BorderThickness="0"
+                Cursor="Hand"
+                Click="OuvrirEpargnes_Click">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}"/>
+                </Button.Style>
+            </Button>
         </StackPanel>
     </Grid>
 </Window>

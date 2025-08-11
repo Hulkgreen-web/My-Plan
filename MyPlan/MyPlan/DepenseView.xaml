@@ -4,36 +4,119 @@
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         Title="Dépenses" Height="700" Width="1000"
         Loaded="Window_Loaded"
-        Background="#f5f7fa">
+        Background="#FFF9F5" FontFamily="Georgia" FontSize="14"
+        WindowStartupLocation="CenterScreen">
 
-    <Grid Margin="20">
+    <Window.Resources>
+        <!-- Style pour les ComboBox -->
+        <Style TargetType="ComboBox">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#FFCC80"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+        <!-- Style pour les boutons -->
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" 
+                                Background="{TemplateBinding Background}" 
+                                CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Opacity" Value="0.9"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Style pour le DataGrid -->
+        <Style TargetType="DataGrid">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#FFCC80"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="RowBackground" Value="White"/>
+            <Setter Property="AlternatingRowBackground" Value="#FFF5E5"/>
+            <Setter Property="GridLinesVisibility" Value="None"/>
+            <Setter Property="HeadersVisibility" Value="Column"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+        </Style>
+
+        <!-- Style pour les en-têtes de colonnes du DataGrid -->
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#FFA726"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="15">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <!-- Barre de filtre -->
+            <!-- Titre -->
+            <RowDefinition Height="Auto"/>
+            <!-- Filtres -->
             <RowDefinition Height="*"/>
             <!-- Contenu principal -->
             <RowDefinition Height="Auto"/>
-            <!-- Bouton enregistrer -->
+            <!-- Bouton Enregistrer -->
         </Grid.RowDefinitions>
 
-        <!-- Barre de filtre + Accueil -->
-        <DockPanel Grid.Row="0" LastChildFill="False" Margin="0,0,0,10">
+        <!-- En-tête orange -->
+        <Border Grid.Row="0" Grid.ColumnSpan="2" 
+                Background="#FFA726" Padding="10" Margin="0,0,0,10">
+            <TextBlock Text="Gestion des Dépenses" 
+                       FontSize="20" 
+                       FontWeight="Bold" 
+                       Foreground="White"
+                       HorizontalAlignment="Center"
+                       FontFamily="Verdana"/>
+        </Border>
+
+        <!-- Barre de filtre -->
+        <DockPanel Grid.Row="1" LastChildFill="False" Margin="0,0,0,15">
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
-                <TextBlock Text="Filtrer par catégorie :" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <TextBlock Text="Filtrer par catégorie :" 
+                           VerticalAlignment="Center" 
+                           Margin="0,0,10,0"
+                           Foreground="#E65100" 
+                           FontWeight="Bold"/>
                 <ComboBox x:Name="CategorieFilterComboBox" Width="200"
                           DisplayMemberPath="Nom"
                           SelectedValuePath="Id"
                           SelectionChanged="CategorieFilterComboBox_SelectionChanged"/>
-                <Button Content="Réinitialiser" Margin="10,0,0,0" Click="ResetFilter_Click"/>
+                <Button Content="Réinitialiser" 
+                        Margin="10,0,0,0" 
+                        Click="ResetFilter_Click"
+                        Background="#FFB74D"/>
             </StackPanel>
             <Button Content="Accueil" DockPanel.Dock="Right"
-                    Background="#2196F3" Foreground="White"
-                    Padding="6,4" Margin="10,0,0,0"
+                    Background="#FB8C00"
                     Click="RetourAccueil_Click"/>
         </DockPanel>
 
         <!-- Contenu principal : DataGrid + Graphique -->
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>
                 <!-- DataGrid -->
@@ -41,54 +124,84 @@
                 <!-- PieChart -->
             </Grid.ColumnDefinitions>
 
-            <!-- DataGrid des revenus -->
-            <DataGrid x:Name="ListeDepenses"
-                      Grid.Column="0"
-                      AutoGenerateColumns="False"
-                      CanUserAddRows="False" CanUserDeleteRows="False"
-                      Margin="0,0,10,0"
-                      IsReadOnly="False"
-                      RowEditEnding="ListeDepenses_RowEditEnding"
-                      ItemsSource="{Binding RevenuList, RelativeSource={RelativeSource AncestorType=Window}}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat=dd/MM/yyyy}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
-                    <DataGridTemplateColumn Header="Catégorie">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding CategorieTransaction.Nom}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                        <DataGridTemplateColumn.CellEditingTemplate>
-                            <DataTemplate>
-                                <ComboBox ItemsSource="{Binding DataContext.CategorieList, RelativeSource={RelativeSource AncestorType=Window}}"
-                                          DisplayMemberPath="Nom"
-                                          SelectedValuePath="Id"
-                                          SelectedValue="{Binding CategorieTransaction.Id, Mode=TwoWay}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellEditingTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="Montant estimé" Binding="{Binding CategorieTransaction.montantEstime}" IsReadOnly="True" />
-                    <DataGridTextColumn Header="Montant (€)" Binding="{Binding Montant}" />
-                </DataGrid.Columns>
-            </DataGrid>
+            <!-- DataGrid des dépenses -->
+            <Border Grid.Column="0" 
+                    Background="White" 
+                    BorderBrush="#FFCC80" 
+                    BorderThickness="1" 
+                    Margin="0,0,10,0">
+                <DataGrid x:Name="ListeDepenses"
+                          AutoGenerateColumns="False"
+                          CanUserAddRows="False" 
+                          CanUserDeleteRows="False"
+                          IsReadOnly="False"
+                          RowEditEnding="ListeDepenses_RowEditEnding"
+                          ItemsSource="{Binding RevenuList, RelativeSource={RelativeSource AncestorType=Window}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Date" 
+                                           Binding="{Binding Date, StringFormat=dd/MM/yyyy}" 
+                                           IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Description" 
+                                           Binding="{Binding Description}" />
+                        <DataGridTemplateColumn Header="Catégorie">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding CategorieTransaction.Nom}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                            <DataGridTemplateColumn.CellEditingTemplate>
+                                <DataTemplate>
+                                    <ComboBox ItemsSource="{Binding DataContext.CategorieList, RelativeSource={RelativeSource AncestorType=Window}}"
+                                              DisplayMemberPath="Nom"
+                                              SelectedValuePath="Id"
+                                              SelectedValue="{Binding CategorieTransaction.Id, Mode=TwoWay}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellEditingTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Montant estimé" 
+                                             Binding="{Binding CategorieTransaction.montantEstime}" 
+                                             IsReadOnly="True" />
+                        <DataGridTextColumn Header="Montant (€)" 
+                                             Binding="{Binding Montant}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
 
             <!-- Graphique en camembert -->
-            <lvc:PieChart x:Name="PieChartDepenses"
-                          Grid.Column="1"
-                          LegendLocation="Bottom"
-                          InnerRadius="40"
-                          Margin="10,0,0,0"
-                          Foreground="#333"
-                          FontSize="14"
-                          FontWeight="SemiBold"/>
+            <Border Grid.Column="1" 
+                    Background="White" 
+                    BorderBrush="#FFCC80" 
+                    BorderThickness="1" 
+                    Padding="10">
+                <lvc:PieChart x:Name="PieChartDepenses"
+                              LegendLocation="Bottom"
+                              InnerRadius="40"
+                              Foreground="#333">
+                    <lvc:PieChart.SeriesColors>
+                        <lvc:ColorsCollection>
+                            <Color>#FFA726</Color>
+                            <Color>#FB8C00</Color>
+                            <Color>#FFB74D</Color>
+                            <Color>#FFCC80</Color>
+                            <Color>#FFE0B2</Color>
+                            <Color>#F57C00</Color>
+                        </lvc:ColorsCollection>
+                    </lvc:PieChart.SeriesColors>
+                    <lvc:PieChart.ChartLegend>
+                        <lvc:DefaultLegend Foreground="#333" FontFamily="Segoe UI"/>
+                    </lvc:PieChart.ChartLegend>
+                </lvc:PieChart>
+            </Border>
         </Grid>
 
         <!-- Bouton Enregistrer -->
-        <Button Grid.Row="2"
+        <Button Grid.Row="3"
                 Content="Enregistrer les modifications"
-                Background="#4CAF50" Foreground="White"
-                Padding="8" Click="Enregistrer_Click"
-                HorizontalAlignment="Right"/>
+                Background="#FFB74D" 
+                Click="Enregistrer_Click"
+                HorizontalAlignment="Right"
+                Margin="0,15,0,0"
+                Width="220"
+                Height="40"/>
     </Grid>
 </Window>

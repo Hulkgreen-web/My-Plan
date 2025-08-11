@@ -1,0 +1,33 @@
+﻿<Window x:Class="MyPlan.CategorieEditView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Modifier Catégorie" Height="400" Width="600"
+        Loaded="Window_Loaded">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Liste -->
+        <DataGrid x:Name="CategorieDataGrid"
+                  Grid.Row="0"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="False"
+                  CanUserAddRows="False"
+                  SelectionMode="Single"
+                  Margin="0,0,0,10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nom" Binding="{Binding Nom, Mode=TwoWay}" Width="*"/>
+                <DataGridTextColumn Header="Montant estimé (€)" Binding="{Binding montantEstime, Mode=TwoWay}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Boutons -->
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right">
+            <Button Content="Enregistrer" Width="100" Margin="0,0,10,0" Click="Enregistrer_Click"/>
+            <Button Content="Fermer" Width="80" Click="Fermer_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

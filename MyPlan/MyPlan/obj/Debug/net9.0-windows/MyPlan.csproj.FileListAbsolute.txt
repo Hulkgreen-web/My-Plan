@@ -154,3 +154,10 @@ C:\Users\aboui\Desktop\My Plan\MyPlan\MyPlan\bin\Debug\net9.0-windows\LiveCharts
 C:\Users\aboui\Desktop\My Plan\MyPlan\MyPlan\bin\Debug\net9.0-windows\LiveCharts.Wpf.dll
 C:\Users\aboui\Desktop\My Plan\MyPlan\MyPlan\obj\Debug\net9.0-windows\DepensesMensuellesView.baml
 C:\Users\aboui\Desktop\My Plan\MyPlan\MyPlan\obj\Debug\net9.0-windows\DepensesMensuellesView.g.cs
+C:\Users\aboui\Desktop\My Plan\MyPlan\MyPlan\obj\Debug\net9.0-windows\App.baml
+C:\Users\aboui\Desktop\My Plan\MyPlan\MyPlan\obj\Debug\net9.0-windows\RevenuMensuelView.baml
+C:\Users\aboui\Desktop\My Plan\MyPlan\MyPlan\obj\Debug\net9.0-windows\RevenuMensuelView.g.cs
+C:\Users\aboui\Desktop\My Plan\MyPlan\MyPlan\obj\Debug\net9.0-windows\EpargneView.baml
+C:\Users\aboui\Desktop\My Plan\MyPlan\MyPlan\obj\Debug\net9.0-windows\EpargneView.g.cs
+C:\Users\aboui\Desktop\My Plan\MyPlan\MyPlan\obj\Debug\net9.0-windows\CategorieEditView.baml
+C:\Users\aboui\Desktop\My Plan\MyPlan\MyPlan\obj\Debug\net9.0-windows\CategorieEditView.g.cs

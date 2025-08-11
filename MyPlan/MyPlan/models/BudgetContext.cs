@@ -12,6 +12,7 @@ namespace MyPlan.models
     {
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<Categorie> Categories { get; set; }
+        public DbSet<Epargne> Epargnes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
             => options.UseSqlite("Data Source=budget.db");
