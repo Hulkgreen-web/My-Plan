@@ -40,6 +40,9 @@ namespace MyPlan.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<decimal>("Objectif")
+                        .HasColumnType("TEXT");
+
                     b.Property<decimal>("montant")
                         .HasColumnType("TEXT");
 

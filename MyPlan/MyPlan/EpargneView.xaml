@@ -65,16 +65,12 @@
     <Grid Margin="15">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <!-- Titre -->
             <RowDefinition Height="Auto"/>
-            <!-- Formulaire -->
             <RowDefinition Height="*"/>
-            <!-- Liste -->
             <RowDefinition Height="Auto"/>
-            <!-- Boutons -->
         </Grid.RowDefinitions>
 
-        <!-- En-tête orange -->
+        <!-- En-tête -->
         <Border Grid.Row="0" Background="#FFA726" Padding="10" Margin="0,0,0,15">
             <TextBlock Text="Gestion des Épargnes" 
                        FontSize="20" 
@@ -87,22 +83,21 @@
         <!-- Formulaire -->
         <Border Grid.Row="1" Background="#FFE0B2" Padding="10" Margin="0,0,0,15">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBox x:Name="NomEpargneBox" Width="200" Margin="0,0,10,0"
+                <TextBox x:Name="NomEpargneBox" Width="120" Height="40" Margin="0,0,10,0"
                          ToolTip="Nom de l'épargne"/>
-
-                <TextBox x:Name="MontantEpargneBox" Width="120" Margin="0,0,10,0"
+                <TextBox x:Name="MontantEpargneBox" Width="120" Height="40" Margin="0,0,10,0"
                          ToolTip="Montant initial"/>
-
+                <TextBox x:Name="ObjectifEpargneBox" Width="120" Height="40" Margin="0,0,10,0"
+                    ToolTip="Objectif d'épargne"/>
                 <Button Content="Créer / Modifier" Width="150"
                         Background="#FB8C00" Click="CreerModifier_Click"/>
-
                 <Button Content="Ajouter +" Width="120" Margin="10,0,0,0"
                         Background="#FFB74D" Click="AjouterArgent_Click"
                         ToolTip="Ajouter un montant à l'épargne sélectionnée"/>
             </StackPanel>
         </Border>
 
-        <!-- Liste des épargnes -->
+        <!-- Liste avec ProgressBar -->
         <Border Grid.Row="2" Background="White" BorderBrush="#FFCC80" BorderThickness="1">
             <DataGrid x:Name="ListeEpargnes"
                       AutoGenerateColumns="False" 
@@ -110,8 +105,28 @@
                       SelectionMode="Single" 
                       SelectionUnit="FullRow">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Nom" Binding="{Binding nom}" Width="*"/>
-                    <DataGridTextColumn Header="Montant (€)" Binding="{Binding montant, StringFormat=N2}" Width="*"/>
+                    <DataGridTextColumn Header="Nom" Binding="{Binding nom}" Width="150"/>
+                    <DataGridTextColumn Header="Montant (€)" Binding="{Binding montant, StringFormat=N2}" Width="100"/>
+                    <DataGridTextColumn Header="Objectif (€)" Binding="{Binding Objectif, StringFormat=N2}" Width="100"/>
+
+                    <!-- Colonne Progression -->
+                    <DataGridTemplateColumn Header="Progression" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <ProgressBar Minimum="0"
+                                                 Maximum="{Binding Objectif}"
+                                                 Value="{Binding montant}"
+                                                 Height="20"
+                                                 Foreground="Green"/>
+                                    <TextBlock Text="{Binding ProgressionPourcent, StringFormat={}{0:P1}}"
+                                               FontSize="12"
+                                               Foreground="#777"
+                                               HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Border>
@@ -122,7 +137,6 @@
                     Background="#F44336" Click="Supprimer_Click"
                     Margin="0,0,10,0"
                     ToolTip="Supprimer l'épargne sélectionnée"/>
-
             <Button Content="Fermer" Width="100"
                     Background="#FFA726" Click="Fermer_Click"/>
         </StackPanel>

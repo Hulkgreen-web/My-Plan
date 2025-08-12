@@ -25,9 +25,11 @@ namespace MyPlan
 
         private void CreerModifier_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(NomEpargneBox.Text) || !decimal.TryParse(MontantEpargneBox.Text, out decimal montant))
+            if (string.IsNullOrWhiteSpace(NomEpargneBox.Text) ||
+                !decimal.TryParse(MontantEpargneBox.Text, out decimal montant) ||
+                !decimal.TryParse(ObjectifEpargneBox.Text, out decimal objectif))
             {
-                MessageBox.Show("Veuillez entrer un nom valide et un montant numérique.");
+                MessageBox.Show("Veuillez entrer un nom valide, un montant et un objectif numériques.");
                 return;
             }
 
@@ -37,16 +39,18 @@ namespace MyPlan
             if (existante != null)
             {
                 existante.montant = montant;
+                existante.Objectif = objectif;
             }
             else
             {
-                db.Epargnes.Add(new Epargne(NomEpargneBox.Text, montant));
+                db.Epargnes.Add(new Epargne(NomEpargneBox.Text, montant, objectif));
             }
 
             db.SaveChanges();
             RafraichirListe();
             NomEpargneBox.Clear();
             MontantEpargneBox.Clear();
+            ObjectifEpargneBox.Clear();
         }
 
         private void AjouterArgent_Click(object sender, RoutedEventArgs e)
