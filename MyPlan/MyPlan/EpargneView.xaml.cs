@@ -10,11 +10,29 @@ namespace MyPlan
         public EpargneView()
         {
             InitializeComponent();
+
+            // Force le chargement initial
+            AppState.Instance.LoadFromDatabase();
+
+            // Abonnement aux changements
+            AppState.Instance.BalanceChanged += (s, e) => UpdateBalanceDisplay();
+
+            // Affichage initial
+            UpdateBalanceDisplay();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             RafraichirListe();
+            UpdateBalanceDisplay();
+        }
+
+        private void UpdateBalanceDisplay()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                SoldeGlobalTextBlock.Text = $"Solde global: {AppState.Instance.TotalBalance:C}";
+            });
         }
 
         private void RafraichirListe()
@@ -33,24 +51,36 @@ namespace MyPlan
                 return;
             }
 
-            using var db = new BudgetContext();
-            var existante = db.Epargnes.FirstOrDefault(ep => ep.nom.ToLower() == NomEpargneBox.Text.ToLower());
-
-            if (existante != null)
+            try
             {
-                existante.montant = montant;
-                existante.Objectif = objectif;
-            }
-            else
-            {
-                db.Epargnes.Add(new Epargne(NomEpargneBox.Text, montant, objectif));
-            }
+                using var db = new BudgetContext();
+                var existante = db.Epargnes.FirstOrDefault(ep => ep.nom.ToLower() == NomEpargneBox.Text.ToLower());
 
-            db.SaveChanges();
-            RafraichirListe();
-            NomEpargneBox.Clear();
-            MontantEpargneBox.Clear();
-            ObjectifEpargneBox.Clear();
+                if (existante != null)
+                {
+                    // Pour une modification, on ajuste la différence
+                    decimal difference = montant - existante.montant;
+                    AppState.Instance.Debit(difference);
+                    existante.montant = montant;
+                    existante.Objectif = objectif;
+                }
+                else
+                {
+                    // Pour une nouvelle épargne, on débite le montant
+                    AppState.Instance.Debit(montant);
+                    db.Epargnes.Add(new Epargne(NomEpargneBox.Text, montant, objectif));
+                }
+
+                db.SaveChanges();
+                RafraichirListe();
+                NomEpargneBox.Clear();
+                MontantEpargneBox.Clear();
+                ObjectifEpargneBox.Clear();
+            }
+            catch (InvalidOperationException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void AjouterArgent_Click(object sender, RoutedEventArgs e)
@@ -61,13 +91,21 @@ namespace MyPlan
 
                 if (decimal.TryParse(input, out decimal ajout) && ajout > 0)
                 {
-                    using var db = new BudgetContext();
-                    var epargne = db.Epargnes.Find(selection.Id);
-                    if (epargne != null)
+                    try
                     {
-                        epargne.montant += ajout;
-                        db.SaveChanges();
-                        RafraichirListe();
+                        using var db = new BudgetContext();
+                        var epargne = db.Epargnes.Find(selection.Id);
+                        if (epargne != null)
+                        {
+                            AppState.Instance.Debit(ajout);
+                            epargne.montant += ajout;
+                            db.SaveChanges();
+                            RafraichirListe();
+                        }
+                    }
+                    catch (InvalidOperationException ex)
+                    {
+                        MessageBox.Show(ex.Message);
                     }
                 }
                 else
@@ -91,6 +129,8 @@ namespace MyPlan
                     var epargne = db.Epargnes.Find(selection.Id);
                     if (epargne != null)
                     {
+                        // Remboursement du montant lors de la suppression
+                        AppState.Instance.Credit(epargne.montant);
                         db.Epargnes.Remove(epargne);
                         db.SaveChanges();
                         RafraichirListe();

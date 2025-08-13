@@ -110,6 +110,7 @@ namespace MyPlan
                         var transactionExistante = db.Transactions
                             .Include(t => t.CategorieTransaction)
                             .FirstOrDefault(t => t.Id == transaction.Id);
+                        var ancienneValeur = transactionExistante.Montant;
 
                         if (transactionExistante != null)
                         {
@@ -130,6 +131,8 @@ namespace MyPlan
                                 transactionExistante.CategorieTransaction = null;
                             }
 
+                            AppState.Instance.Debit(ancienneValeur);
+                            AppState.Instance.Credit(transaction.Montant);
                             db.SaveChanges();
                             ChargerRevenus();
                         }

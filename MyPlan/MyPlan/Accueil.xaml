@@ -2,11 +2,39 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Accueil - My Plan"
-        Height="450" Width="650"
+        Height="500" Width="700"
         Background="#FFF9F5"
         FontFamily="Georgia"
         FontSize="14"
         WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <!-- Style unifié pour tous les boutons -->
+        <Style x:Key="MenuButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="280"/>
+            <Setter Property="Height" Value="45"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Margin" Value="0,0,0,15"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.9"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
 
     <Grid Margin="20">
         <Grid.RowDefinitions>
@@ -14,7 +42,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- En-tête avec dégradé orange -->
+        <!-- En-tête -->
         <Border Grid.Row="0" Background="#FFA726" CornerRadius="6" Padding="15" Margin="0,0,0,25">
             <TextBlock Text="My Plan" 
                        FontSize="28" 
@@ -24,90 +52,49 @@
                        FontFamily="Verdana"/>
         </Border>
 
-        <!-- Contenu principal -->
-        <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="400">
-            <TextBlock Text="Gestion financière intuitive" 
-                       FontSize="18" 
-                       Margin="0,0,0,30" 
-                       TextAlignment="Center"
-                       Foreground="#E65100"/>
+        <!-- Contenu principal - disposition en 2 colonnes -->
+        <Grid Grid.Row="1" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-            <!-- Boutons avec effets de survol -->
-            <Button Content="Commencer à gérer mon budget" 
-                    Width="280" Height="45" 
-                    Background="#FB8C00" 
-                    Foreground="White" 
-                    FontWeight="Bold"
-                    FontSize="15"
-                    Margin="0,0,0,15"
-                    BorderThickness="0"
-                    Cursor="Hand"
-                    Click="StartBudget_Click">
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="Button">
-                                    <Border Background="{TemplateBinding Background}" CornerRadius="4">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#F57C00"/>
-                                <Setter Property="Foreground" Value="White"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
+            <!-- Colonne gauche -->
+            <StackPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0">
+                <Button Content="Commencer à gérer mon budget" 
+                        Style="{StaticResource MenuButtonStyle}"
+                        Background="#FB8C00"
+                        Click="StartBudget_Click"/>
 
-            <Button Content="Visualiser les revenus" 
-                    Width="280" Height="45" 
-                    Background="#FFB74D" 
-                    Foreground="White" 
-                    FontWeight="Bold"
-                    FontSize="15"
-                    Margin="0,0,0,15"
-                    BorderThickness="0"
-                    Cursor="Hand"
-                    Click="OuvrirRevenus_Click">
-                <Button.Style>
-                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}"/>
-                </Button.Style>
-            </Button>
+                <Button Content="Visualiser les revenus" 
+                        Style="{StaticResource MenuButtonStyle}"
+                        Background="#FFB74D"
+                        Click="OuvrirRevenus_Click"/>
 
-            <Button Content="Visualiser les dépenses"
-                    Width="280" Height="45" 
-                    Background="#FFCC80" 
-                    Foreground="White" 
-                    FontWeight="Bold"
-                    FontSize="15"
-                    Margin="0,0,0,15"
-                    BorderThickness="0"
-                    Cursor="Hand"
-                    Click="OuvrirDepenses_Click">
-                <Button.Style>
-                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}"/>
-                </Button.Style>
-            </Button>
+                <Button Content="Visualiser les dépenses"
+                        Style="{StaticResource MenuButtonStyle}"
+                        Background="#FFCC80"
+                        Click="OuvrirDepenses_Click"/>
+            </StackPanel>
 
-            <Button Content="Gérer les épargnes"
-                Width="280" Height="45" 
-                Background="#BF360C" 
-                Foreground="White" 
-                FontWeight="Bold"
-                FontSize="15"
-                Margin="0,0,0,15"
-                BorderThickness="0"
-                Cursor="Hand"
-                Click="OuvrirEpargnes_Click">
-                <Button.Style>
-                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}"/>
-                </Button.Style>
-            </Button>
-        </StackPanel>
+            <!-- Colonne droite -->
+            <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0">
+                <Button Content="Gérer les épargnes"
+                        Style="{StaticResource MenuButtonStyle}"
+                        Background="#E65100"
+                        Click="OuvrirEpargnes_Click"/>
+
+                <Button Content="Gérer le solde" 
+                        Style="{StaticResource MenuButtonStyle}"
+                        Background="#F57C00"
+                        Click="ManageBalance_Click"/>
+
+                <!-- Espace pour un éventuel 6ème bouton -->
+                <Button Content="Quitter"
+                        Style="{StaticResource MenuButtonStyle}"
+                        Background="#FFA726"
+                        Click="Quit_Click"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

@@ -72,12 +72,22 @@
 
         <!-- En-tête -->
         <Border Grid.Row="0" Background="#FFA726" Padding="10" Margin="0,0,0,15">
-            <TextBlock Text="Gestion des Épargnes" 
-                       FontSize="20" 
-                       FontWeight="Bold" 
-                       Foreground="White"
-                       HorizontalAlignment="Center"
-                       FontFamily="Verdana"/>
+            <StackPanel>
+                <TextBlock Text="Gestion des Épargnes" 
+                   FontSize="20" 
+                   FontWeight="Bold" 
+                   Foreground="White"
+                   HorizontalAlignment="Center"
+                   FontFamily="Verdana"/>
+
+                <!-- Nouveau TextBlock pour le solde -->
+                <TextBlock x:Name="SoldeGlobalTextBlock" 
+                   Text="Solde global: 0,00 €"
+                   Foreground="White"
+                   HorizontalAlignment="Center"
+                   Margin="0,5,0,0"
+                   FontWeight="SemiBold"/>
+            </StackPanel>
         </Border>
 
         <!-- Formulaire -->
@@ -130,9 +140,8 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Border>
-
         <!-- Boutons bas -->
-        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,10,0">
             <Button Content="Supprimer" Width="120"
                     Background="#F44336" Click="Supprimer_Click"
                     Margin="0,0,10,0"

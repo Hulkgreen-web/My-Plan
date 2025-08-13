@@ -52,5 +52,17 @@ namespace MyPlan
             depenseView.Show();
             this.Close();
         }
+
+        private void ManageBalance_Click(object sender, RoutedEventArgs e)
+        {
+            var balanceWindow = new BalanceWindow();
+            balanceWindow.Show();
+            this.Close();
+        }
+
+        private void Quit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }

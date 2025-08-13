@@ -62,6 +62,13 @@ namespace MyPlan
                     }
                 }
 
+                if (EstRevenuCheck.IsChecked == false)
+                {
+                    AppState.Instance.Debit(montant);
+                } else
+                {
+                    AppState.Instance.Credit(montant);
+                }
                 db.Transactions.Add(transaction);
                 db.SaveChanges();
             }
@@ -125,7 +132,14 @@ namespace MyPlan
                 var toDelete = db.Transactions.Find(transaction.Id);
                 if (toDelete != null)
                 {
-                    db.Transactions.Remove(toDelete);
+                    if (toDelete.EstRevenu == false)
+                    {
+                        AppState.Instance.Credit(toDelete.Montant);
+                    } else
+                    {
+                        AppState.Instance.Debit(toDelete.Montant);
+                    }
+                        db.Transactions.Remove(toDelete);
                     db.SaveChanges();
                 }
                 ChargerTransactions();

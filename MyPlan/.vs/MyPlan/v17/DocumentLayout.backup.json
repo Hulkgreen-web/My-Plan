@@ -3,20 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|c:\\users\\aboui\\desktop\\my plan\\myplan\\myplan\\epargneview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|solutionrelative:myplan\\epargneview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|c:\\users\\aboui\\desktop\\my plan\\myplan\\myplan\\epargneview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|solutionrelative:myplan\\epargneview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|c:\\users\\aboui\\desktop\\my plan\\myplan\\myplan\\models\\epargne.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|solutionrelative:myplan\\models\\epargne.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|c:\\users\\aboui\\desktop\\my plan\\myplan\\myplan\\balancewindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|solutionrelative:myplan\\balancewindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|c:\\users\\aboui\\desktop\\my plan\\myplan\\myplan\\models\\budgetcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|solutionrelative:myplan\\models\\budgetcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|c:\\users\\aboui\\desktop\\my plan\\myplan\\myplan\\revenueview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|solutionrelative:myplan\\revenueview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|c:\\users\\aboui\\desktop\\my plan\\myplan\\myplan\\accueil.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|solutionrelative:myplan\\accueil.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|c:\\users\\aboui\\desktop\\my plan\\myplan\\myplan\\accueil.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|solutionrelative:myplan\\accueil.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|c:\\users\\aboui\\desktop\\my plan\\myplan\\myplan\\depenseview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0567C707-EA02-4C97-8B7C-10468F198977}|MyPlan\\MyPlan.csproj|solutionrelative:myplan\\depenseview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,54 +46,75 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Epargne.cs",
-              "DocumentMoniker": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\models\\Epargne.cs",
-              "RelativeDocumentMoniker": "MyPlan\\models\\Epargne.cs",
-              "ToolTip": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\models\\Epargne.cs",
-              "RelativeToolTip": "MyPlan\\models\\Epargne.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAA6AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-12T11:29:38.471Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "EpargneView.xaml",
-              "DocumentMoniker": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\EpargneView.xaml",
-              "RelativeDocumentMoniker": "MyPlan\\EpargneView.xaml",
-              "ToolTip": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\EpargneView.xaml",
-              "RelativeToolTip": "MyPlan\\EpargneView.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-08-12T11:03:34.689Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "BudgetContext.cs",
-              "DocumentMoniker": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\models\\BudgetContext.cs",
-              "RelativeDocumentMoniker": "MyPlan\\models\\BudgetContext.cs",
-              "ToolTip": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\models\\BudgetContext.cs",
-              "RelativeToolTip": "MyPlan\\models\\BudgetContext.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-12T11:00:34.377Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "EpargneView.xaml.cs",
               "DocumentMoniker": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\EpargneView.xaml.cs",
               "RelativeDocumentMoniker": "MyPlan\\EpargneView.xaml.cs",
               "ToolTip": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\EpargneView.xaml.cs",
               "RelativeToolTip": "MyPlan\\EpargneView.xaml.cs",
-              "ViewState": "AgIAACgAAAAAAAAAAAAmwB0AAAAiAAAAAAAAAA==",
+              "ViewState": "AgIAAFYAAAAAAAAAAAAswGQAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-12T10:58:57.137Z",
+              "WhenOpened": "2025-08-13T10:49:29.087Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "BalanceWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\BalanceWindow.xaml",
+              "RelativeDocumentMoniker": "MyPlan\\BalanceWindow.xaml",
+              "ToolTip": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\BalanceWindow.xaml",
+              "RelativeToolTip": "MyPlan\\BalanceWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-08-13T10:24:12.017Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Accueil.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\Accueil.xaml.cs",
+              "RelativeDocumentMoniker": "MyPlan\\Accueil.xaml.cs",
+              "ToolTip": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\Accueil.xaml.cs",
+              "RelativeToolTip": "MyPlan\\Accueil.xaml.cs",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAkwEEAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-13T10:21:42.431Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Accueil.xaml",
+              "DocumentMoniker": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\Accueil.xaml",
+              "RelativeDocumentMoniker": "MyPlan\\Accueil.xaml",
+              "ToolTip": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\Accueil.xaml",
+              "RelativeToolTip": "MyPlan\\Accueil.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-08-13T10:18:14.283Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "RevenueView.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\RevenueView.xaml.cs",
+              "RelativeDocumentMoniker": "MyPlan\\RevenueView.xaml.cs",
+              "ToolTip": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\RevenueView.xaml.cs",
+              "RelativeToolTip": "MyPlan\\RevenueView.xaml.cs",
+              "ViewState": "AgIAALQAAAAAAAAAAAAIwLsAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-13T10:12:14.753Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DepenseView.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\DepenseView.xaml.cs",
+              "RelativeDocumentMoniker": "MyPlan\\DepenseView.xaml.cs",
+              "ToolTip": "C:\\Users\\aboui\\Desktop\\My Plan\\MyPlan\\MyPlan\\DepenseView.xaml.cs",
+              "RelativeToolTip": "MyPlan\\DepenseView.xaml.cs",
+              "ViewState": "AgIAAHsAAAAAAAAAAAAmwIoAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-13T09:49:38.938Z"
             }
           ]
         }

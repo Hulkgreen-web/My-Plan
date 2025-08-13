@@ -161,3 +161,5 @@ C:\Users\aboui\Desktop\My Plan\MyPlan\MyPlan\obj\Debug\net9.0-windows\EpargneVie
 C:\Users\aboui\Desktop\My Plan\MyPlan\MyPlan\obj\Debug\net9.0-windows\EpargneView.g.cs
 C:\Users\aboui\Desktop\My Plan\MyPlan\MyPlan\obj\Debug\net9.0-windows\CategorieEditView.baml
 C:\Users\aboui\Desktop\My Plan\MyPlan\MyPlan\obj\Debug\net9.0-windows\CategorieEditView.g.cs
+C:\Users\aboui\Desktop\My Plan\MyPlan\MyPlan\obj\Debug\net9.0-windows\BalanceWindow.baml
+C:\Users\aboui\Desktop\My Plan\MyPlan\MyPlan\obj\Debug\net9.0-windows\BalanceWindow.g.cs
