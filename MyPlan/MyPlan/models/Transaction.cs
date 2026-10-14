@@ -1,9 +1,8 @@
-﻿using System;
+using System;
 using MyPlan.models;
 
 public class Transaction
 {
-    private static int nextId = 1;
     public int Id { get; set; }
     public string Date { get; set; }
     public string Description { get; set; }

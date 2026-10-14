@@ -1,6 +1,8 @@
-﻿using System;
+using System;
 using System.Linq;
-using System.Windows;
+using Avalonia.Controls;
+using Avalonia.Input;
+using Avalonia.Interactivity;
 using Microsoft.EntityFrameworkCore;
 using MyPlan.models;
 
@@ -29,7 +31,7 @@ namespace MyPlan
             CurrentBalanceText.Text = balance.Balance.ToString("C");
         }
 
-        private void SetInitialBalance_Click(object sender, RoutedEventArgs e)
+        private async void SetInitialBalance_Click(object? sender, RoutedEventArgs e)
         {
             if (decimal.TryParse(AmountTextBox.Text, out decimal amount))
             {
@@ -40,21 +42,28 @@ namespace MyPlan
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    await DialogHelper.ShowMessageAsync(this, ex.Message, "Erreur");
                 }
             }
             else
             {
-                MessageBox.Show("Montant invalide");
+                await DialogHelper.ShowMessageAsync(this, "Montant invalide", "Erreur");
             }
         }
 
-        private void RetourAccueil_Click(object sender, RoutedEventArgs e)
+        private void AmountTextBox_KeyDown(object? sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                SetInitialBalance_Click(sender, new RoutedEventArgs());
+            }
+        }
+
+        private void RetourAccueil_Click(object? sender, RoutedEventArgs e)
         {
             var accueil = new Accueil();
             accueil.Show();
             this.Close();
         }
-
     }
 }

@@ -1,0 +1,72 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="MyPlan.CategorieEditView"
+        Title="Modifier Catégorie" Height="400" Width="600"
+        Background="#FFF9F5" FontFamily="Georgia" FontSize="14"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded">
+
+    <Window.Styles>
+        <Style Selector="Button">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Height" Value="38"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+        <Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{Binding $parent[Button].Background}"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+            <Setter Property="Opacity" Value="0.9"/>
+        </Style>
+
+        <Style Selector="DataGrid">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#FFCC80"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="RowBackground" Value="White"/>
+            <Setter Property="FontSize" Value="13"/>
+        </Style>
+
+        <Style Selector="DataGridColumnHeader">
+            <Setter Property="Background" Value="#FFA726"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="10,5"/>
+        </Style>
+    </Window.Styles>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Liste -->
+        <DataGrid x:Name="CategorieDataGrid"
+                  Grid.Row="0"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="False"
+                  CanUserSortColumns="True"
+                  SelectionMode="Single"
+                  Margin="0,0,0,15">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nom" Binding="{Binding Nom, Mode=TwoWay}" Width="*"/>
+                <DataGridTextColumn Header="Montant estimé (€)" Binding="{Binding montantEstime, Mode=TwoWay}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Boutons -->
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right">
+            <Button Content="Enregistrer" Width="110" Margin="0,0,10,0" Background="#FB8C00" Click="Enregistrer_Click"/>
+            <Button Content="Fermer" Width="90" Background="#BF360C" Click="Fermer_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

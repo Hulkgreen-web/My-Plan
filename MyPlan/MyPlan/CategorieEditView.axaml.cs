@@ -1,6 +1,8 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
+using Avalonia.Controls;
+using Avalonia.Interactivity;
 using MyPlan.models;
 
 namespace MyPlan
@@ -12,7 +14,7 @@ namespace MyPlan
             InitializeComponent();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object? sender, RoutedEventArgs e)
         {
             RafraichirListe();
         }
@@ -23,13 +25,13 @@ namespace MyPlan
             CategorieDataGrid.ItemsSource = db.Categories.ToList();
         }
 
-        private void Enregistrer_Click(object sender, RoutedEventArgs e)
+        private async void Enregistrer_Click(object? sender, RoutedEventArgs e)
         {
             using var db = new BudgetContext();
 
-            foreach (var item in CategorieDataGrid.Items)
+            if (CategorieDataGrid.ItemsSource is IEnumerable<Categorie> categories)
             {
-                if (item is Categorie cat)
+                foreach (var cat in categories)
                 {
                     var catDb = db.Categories.Find(cat.Id);
                     if (catDb != null)
@@ -41,11 +43,11 @@ namespace MyPlan
             }
 
             db.SaveChanges();
-            MessageBox.Show("Modifications enregistrées !");
+            await DialogHelper.ShowMessageAsync(this, "Modifications enregistrées !");
             RafraichirListe();
         }
 
-        private void Fermer_Click(object sender, RoutedEventArgs e)
+        private void Fermer_Click(object? sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();

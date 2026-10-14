@@ -1,6 +1,6 @@
-﻿<Window x:Class="MyPlan.Accueil"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="MyPlan.Accueil"
         Title="Accueil - My Plan"
         Height="500" Width="700"
         Background="#FFF9F5"
@@ -8,9 +8,9 @@
         FontSize="14"
         WindowStartupLocation="CenterScreen">
 
-    <Window.Resources>
-        <!-- Style unifié pour tous les boutons -->
-        <Style x:Key="MenuButtonStyle" TargetType="Button">
+    <Window.Styles>
+        <!-- Style unifié pour tous les boutons du menu -->
+        <Style Selector="Button.MenuButton">
             <Setter Property="Width" Value="280"/>
             <Setter Property="Height" Value="45"/>
             <Setter Property="Foreground" Value="White"/>
@@ -19,22 +19,18 @@
             <Setter Property="Margin" Value="0,0,0,15"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" CornerRadius="4">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Opacity" Value="0.9"/>
-                </Trigger>
-            </Style.Triggers>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
-    </Window.Resources>
+
+        <!-- Effet survol : conserve la couleur de fond spécifique du bouton et applique l'opacité 0.9 -->
+        <Style Selector="Button.MenuButton:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{Binding $parent[Button].Background}"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+            <Setter Property="Opacity" Value="0.9"/>
+        </Style>
+    </Window.Styles>
 
     <Grid Margin="20">
         <Grid.RowDefinitions>
@@ -62,17 +58,17 @@
             <!-- Colonne gauche -->
             <StackPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0">
                 <Button Content="Commencer à gérer mon budget" 
-                        Style="{StaticResource MenuButtonStyle}"
+                        Classes="MenuButton"
                         Background="#FB8C00"
                         Click="StartBudget_Click"/>
 
                 <Button Content="Visualiser les revenus" 
-                        Style="{StaticResource MenuButtonStyle}"
+                        Classes="MenuButton"
                         Background="#FFB74D"
                         Click="OuvrirRevenus_Click"/>
 
                 <Button Content="Visualiser les dépenses"
-                        Style="{StaticResource MenuButtonStyle}"
+                        Classes="MenuButton"
                         Background="#FFCC80"
                         Click="OuvrirDepenses_Click"/>
             </StackPanel>
@@ -80,18 +76,17 @@
             <!-- Colonne droite -->
             <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0">
                 <Button Content="Gérer les épargnes"
-                        Style="{StaticResource MenuButtonStyle}"
+                        Classes="MenuButton"
                         Background="#E65100"
                         Click="OuvrirEpargnes_Click"/>
 
                 <Button Content="Gérer le solde" 
-                        Style="{StaticResource MenuButtonStyle}"
+                        Classes="MenuButton"
                         Background="#F57C00"
                         Click="ManageBalance_Click"/>
 
-                <!-- Espace pour un éventuel 6ème bouton -->
                 <Button Content="Quitter"
-                        Style="{StaticResource MenuButtonStyle}"
+                        Classes="MenuButton"
                         Background="#FFA726"
                         Click="Quit_Click"/>
             </StackPanel>

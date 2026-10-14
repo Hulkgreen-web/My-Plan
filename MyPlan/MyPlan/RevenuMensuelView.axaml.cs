@@ -1,62 +1,68 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
-using LiveCharts;
-using LiveCharts.Wpf;
+using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Microsoft.EntityFrameworkCore;
 using MyPlan.models;
+using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+using SkiaSharp;
 
 namespace MyPlan
 {
-    /// <summary>
-    /// Logique d'interaction pour Window1.xaml
-    /// </summary>
+    public class MoisItem
+    {
+        public string Nom { get; set; } = string.Empty;
+        public int Numero { get; set; }
+        public override string ToString() => Nom;
+    }
+
     public partial class RevenuMensuelView : Window
     {
+        private static readonly string[] ChartColors = new[]
+        {
+            "#FFA726", "#FB8C00", "#FFB74D", "#FFCC80", "#FFE0B2", "#F57C00"
+        };
+
         public RevenuMensuelView()
         {
             InitializeComponent();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object? sender, RoutedEventArgs e)
         {
             ChargerMoisEtAnnees();
-            if (MoisComboBox.SelectedValue is int mois && AnneeComboBox.SelectedItem is int annee)
+            if (MoisComboBox.SelectedItem is MoisItem mois && AnneeComboBox.SelectedItem is int annee)
             {
-                ChargerRevenus(mois, annee);
+                ChargerRevenus(mois.Numero, annee);
             }
         }
 
-        private void ComboBoxDate_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ComboBoxDate_SelectionChanged(object? sender, SelectionChangedEventArgs e)
         {
-            if (MoisComboBox.SelectedValue is int mois && AnneeComboBox.SelectedItem is int annee)
+            if (MoisComboBox.SelectedItem is MoisItem mois && AnneeComboBox.SelectedItem is int annee)
             {
-                ChargerRevenus(mois, annee);
+                ChargerRevenus(mois.Numero, annee);
             }
         }
 
         private void ChargerMoisEtAnnees()
         {
-            // Mois (noms français)
             var moisNoms = CultureInfo.GetCultureInfo("fr-FR").DateTimeFormat.MonthNames
-                .Where(m => !string.IsNullOrEmpty(m)) // Exclure la case vide à la fin
-                .Select((nom, index) => new { Nom = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(nom), Numero = index + 1 })
+                .Where(m => !string.IsNullOrEmpty(m))
+                .Select((nom, index) => new MoisItem { Nom = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(nom), Numero = index + 1 })
                 .ToList();
 
             MoisComboBox.ItemsSource = moisNoms;
-            MoisComboBox.DisplayMemberPath = "Nom";
-            MoisComboBox.SelectedValuePath = "Numero";
 
-            // Années (exemple : de 2022 à l'année actuelle)
             int currentYear = DateTime.Now.Year;
             var annees = Enumerable.Range(currentYear - 3, 80).ToList();
             AnneeComboBox.ItemsSource = annees;
 
-            // Pré-sélection mois et année actuels
-            MoisComboBox.SelectedValue = DateTime.Now.Month;
+            MoisComboBox.SelectedItem = moisNoms.FirstOrDefault(m => m.Numero == DateTime.Now.Month);
             AnneeComboBox.SelectedItem = currentYear;
         }
 
@@ -87,20 +93,34 @@ namespace MyPlan
 
             RevenusParCategorieDataGrid.ItemsSource = revenusParCategorie;
 
-            // ✅ Chargement du graphique
-            RevenusPieChart.Series = new SeriesCollection();
+            var series = new List<ISeries>();
+            int idx = 0;
+
             foreach (var cat in revenusParCategorie)
             {
                 if (cat.MontantReel > 0)
                 {
-                    RevenusPieChart.Series.Add(new PieSeries
+                    var colorHex = ChartColors[idx % ChartColors.Length];
+                    series.Add(new PieSeries<double>
                     {
-                        Title = cat.Nom,
-                        Values = new ChartValues<decimal> { cat.MontantReel },
-                        DataLabels = true
+                        Name = cat.Nom,
+                        Values = new double[] { (double)cat.MontantReel },
+                        Fill = new SolidColorPaint(SKColor.Parse(colorHex)),
+                        DataLabelsPaint = new SolidColorPaint(SKColors.DarkSlateGray),
+                        DataLabelsFormatter = p => $"{p.Coordinate.PrimaryValue:N2} €"
                     });
+                    idx++;
                 }
             }
+
+            RevenusPieChart.Series = series;
+        }
+
+        private void RetourAccueil_Click(object? sender, RoutedEventArgs e)
+        {
+            var accueil = new Accueil();
+            accueil.Show();
+            this.Close();
         }
     }
 }
