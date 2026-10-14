@@ -1,66 +1,61 @@
-﻿<Window x:Class="MyPlan.EpargneView"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="MyPlan.EpargneView"
         Title="Gestion de l'Épargne" Height="550" Width="750"
         Background="#FFF9F5" FontFamily="Georgia" FontSize="14"
         WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded">
 
-    <Window.Resources>
-        <!-- Styles réutilisés -->
-        <Style TargetType="TextBox">
+    <Window.Styles>
+        <Style Selector="TextBox">
             <Setter Property="Background" Value="White"/>
             <Setter Property="BorderBrush" Value="#FFCC80"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Padding" Value="8"/>
             <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="Height" Value="30"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="CornerRadius" Value="4"/>
+        </Style>
+        <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+            <Setter Property="BorderBrush" Value="#FFA726"/>
+            <Setter Property="CornerRadius" Value="4"/>
         </Style>
 
-        <Style TargetType="Button">
+        <Style Selector="Button">
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Padding" Value="8,4"/>
             <Setter Property="Height" Value="35"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border x:Name="border" 
-                                Background="{TemplateBinding Background}" 
-                                CornerRadius="4">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="Opacity" Value="0.9"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
 
-        <Style TargetType="DataGrid">
+        <Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{Binding $parent[Button].Background}"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+            <Setter Property="Opacity" Value="0.9"/>
+        </Style>
+
+        <Style Selector="DataGrid">
             <Setter Property="Background" Value="White"/>
             <Setter Property="BorderBrush" Value="#FFCC80"/>
             <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="4"/>
             <Setter Property="RowBackground" Value="White"/>
-            <Setter Property="AlternatingRowBackground" Value="#FFF5E5"/>
-            <Setter Property="GridLinesVisibility" Value="None"/>
-            <Setter Property="HeadersVisibility" Value="Column"/>
             <Setter Property="FontFamily" Value="Segoe UI"/>
             <Setter Property="FontSize" Value="13"/>
         </Style>
 
-        <Style TargetType="DataGridColumnHeader">
+        <Style Selector="DataGridColumnHeader">
             <Setter Property="Background" Value="#FFA726"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Padding" Value="10,5"/>
         </Style>
-    </Window.Resources>
+    </Window.Styles>
 
     <Grid Margin="15">
         <Grid.RowDefinitions>
@@ -71,68 +66,71 @@
         </Grid.RowDefinitions>
 
         <!-- En-tête -->
-        <Border Grid.Row="0" Background="#FFA726" Padding="10" Margin="0,0,0,15">
+        <Border Grid.Row="0" Background="#FFA726" Padding="10" Margin="0,0,0,15" CornerRadius="4">
             <StackPanel>
                 <TextBlock Text="Gestion des Épargnes" 
-                   FontSize="20" 
-                   FontWeight="Bold" 
-                   Foreground="White"
-                   HorizontalAlignment="Center"
-                   FontFamily="Verdana"/>
+                           FontSize="20" 
+                           FontWeight="Bold" 
+                           Foreground="White"
+                           HorizontalAlignment="Center"
+                           FontFamily="Verdana"/>
 
-                <!-- Nouveau TextBlock pour le solde -->
+                <!-- Solde global -->
                 <TextBlock x:Name="SoldeGlobalTextBlock" 
-                   Text="Solde global: 0,00 €"
-                   Foreground="White"
-                   HorizontalAlignment="Center"
-                   Margin="0,5,0,0"
-                   FontWeight="SemiBold"/>
+                           Text="Solde global: 0,00 €"
+                           Foreground="White"
+                           HorizontalAlignment="Center"
+                           Margin="0,5,0,0"
+                           FontWeight="SemiBold"/>
             </StackPanel>
         </Border>
 
         <!-- Formulaire -->
-        <Border Grid.Row="1" Background="#FFE0B2" Padding="10" Margin="0,0,0,15">
+        <Border Grid.Row="1" Background="#FFE0B2" Padding="10" Margin="0,0,0,15" CornerRadius="4">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBox x:Name="NomEpargneBox" Width="120" Height="40" Margin="0,0,10,0"
-                         ToolTip="Nom de l'épargne"/>
+                         Watermark="Nom"
+                         ToolTip.Tip="Nom de l'épargne"/>
                 <TextBox x:Name="MontantEpargneBox" Width="120" Height="40" Margin="0,0,10,0"
-                         ToolTip="Montant initial"/>
+                         Watermark="Montant"
+                         ToolTip.Tip="Montant initial"/>
                 <TextBox x:Name="ObjectifEpargneBox" Width="120" Height="40" Margin="0,0,10,0"
-                    ToolTip="Objectif d'épargne"/>
+                         Watermark="Objectif"
+                         ToolTip.Tip="Objectif d'épargne"/>
                 <Button Content="Créer / Modifier" Width="150"
                         Background="#FB8C00" Click="CreerModifier_Click"/>
                 <Button Content="Ajouter +" Width="120" Margin="10,0,0,0"
                         Background="#FFB74D" Click="AjouterArgent_Click"
-                        ToolTip="Ajouter un montant à l'épargne sélectionnée"/>
+                        ToolTip.Tip="Ajouter un montant à l'épargne sélectionnée"/>
             </StackPanel>
         </Border>
 
         <!-- Liste avec ProgressBar -->
-        <Border Grid.Row="2" Background="White" BorderBrush="#FFCC80" BorderThickness="1">
+        <Border Grid.Row="2" Background="White" BorderBrush="#FFCC80" BorderThickness="1" CornerRadius="4">
             <DataGrid x:Name="ListeEpargnes"
                       AutoGenerateColumns="False" 
                       IsReadOnly="True"
-                      SelectionMode="Single" 
-                      SelectionUnit="FullRow">
+                      SelectionMode="Single">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Nom" Binding="{Binding nom}" Width="150"/>
-                    <DataGridTextColumn Header="Montant (€)" Binding="{Binding montant, StringFormat=N2}" Width="100"/>
-                    <DataGridTextColumn Header="Objectif (€)" Binding="{Binding Objectif, StringFormat=N2}" Width="100"/>
+                    <DataGridTextColumn Header="Montant (€)" Binding="{Binding montant, StringFormat=\{0:N2\}}" Width="120"/>
+                    <DataGridTextColumn Header="Objectif (€)" Binding="{Binding Objectif, StringFormat=\{0:N2\}}" Width="120"/>
 
                     <!-- Colonne Progression -->
                     <DataGridTemplateColumn Header="Progression" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <StackPanel>
+                                <StackPanel VerticalAlignment="Center" Margin="5">
                                     <ProgressBar Minimum="0"
                                                  Maximum="{Binding Objectif}"
                                                  Value="{Binding montant}"
-                                                 Height="20"
-                                                 Foreground="Green"/>
-                                    <TextBlock Text="{Binding ProgressionPourcent, StringFormat={}{0:P1}}"
+                                                 Height="18"
+                                                 Foreground="#4CAF50"/>
+                                    <TextBlock Text="{Binding ProgressionPourcent, StringFormat=\{0:P1\}}"
                                                FontSize="12"
                                                Foreground="#777"
-                                               HorizontalAlignment="Center"/>
+                                               HorizontalAlignment="Center"
+                                               Margin="0,3,0,0"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -140,12 +138,13 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Border>
+
         <!-- Boutons bas -->
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,10,0">
             <Button Content="Supprimer" Width="120"
                     Background="#F44336" Click="Supprimer_Click"
                     Margin="0,0,10,0"
-                    ToolTip="Supprimer l'épargne sélectionnée"/>
+                    ToolTip.Tip="Supprimer l'épargne sélectionnée"/>
             <Button Content="Fermer" Width="100"
                     Background="#FFA726" Click="Fermer_Click"/>
         </StackPanel>

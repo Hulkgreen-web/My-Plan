@@ -1,6 +1,8 @@
-﻿using System;
+using System;
 using System.Linq;
-using System.Windows;
+using Avalonia.Controls;
+using Avalonia.Interactivity;
+using Avalonia.Threading;
 using MyPlan.models;
 
 namespace MyPlan
@@ -21,7 +23,7 @@ namespace MyPlan
             UpdateBalanceDisplay();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object? sender, RoutedEventArgs e)
         {
             RafraichirListe();
             UpdateBalanceDisplay();
@@ -29,7 +31,7 @@ namespace MyPlan
 
         private void UpdateBalanceDisplay()
         {
-            Dispatcher.Invoke(() =>
+            Dispatcher.UIThread.Post(() =>
             {
                 SoldeGlobalTextBlock.Text = $"Solde global: {AppState.Instance.TotalBalance:C}";
             });
@@ -41,13 +43,13 @@ namespace MyPlan
             ListeEpargnes.ItemsSource = db.Epargnes.ToList();
         }
 
-        private void CreerModifier_Click(object sender, RoutedEventArgs e)
+        private async void CreerModifier_Click(object? sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(NomEpargneBox.Text) ||
                 !decimal.TryParse(MontantEpargneBox.Text, out decimal montant) ||
                 !decimal.TryParse(ObjectifEpargneBox.Text, out decimal objectif))
             {
-                MessageBox.Show("Veuillez entrer un nom valide, un montant et un objectif numériques.");
+                await DialogHelper.ShowMessageAsync(this, "Veuillez entrer un nom valide, un montant et un objectif numériques.");
                 return;
             }
 
@@ -79,15 +81,15 @@ namespace MyPlan
             }
             catch (InvalidOperationException ex)
             {
-                MessageBox.Show(ex.Message);
+                await DialogHelper.ShowMessageAsync(this, ex.Message, "Erreur");
             }
         }
 
-        private void AjouterArgent_Click(object sender, RoutedEventArgs e)
+        private async void AjouterArgent_Click(object? sender, RoutedEventArgs e)
         {
             if (ListeEpargnes.SelectedItem is Epargne selection)
             {
-                string input = Microsoft.VisualBasic.Interaction.InputBox("Montant à ajouter :", "Ajouter à l'épargne", "0");
+                string? input = await DialogHelper.ShowInputAsync(this, "Montant à ajouter :", "Ajouter à l'épargne", "0");
 
                 if (decimal.TryParse(input, out decimal ajout) && ajout > 0)
                 {
@@ -105,25 +107,25 @@ namespace MyPlan
                     }
                     catch (InvalidOperationException ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        await DialogHelper.ShowMessageAsync(this, ex.Message, "Erreur");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Montant invalide.");
+                    await DialogHelper.ShowMessageAsync(this, "Montant invalide.");
                 }
             }
             else
             {
-                MessageBox.Show("Sélectionnez une épargne.");
+                await DialogHelper.ShowMessageAsync(this, "Sélectionnez une épargne.");
             }
         }
 
-        private void Supprimer_Click(object sender, RoutedEventArgs e)
+        private async void Supprimer_Click(object? sender, RoutedEventArgs e)
         {
             if (ListeEpargnes.SelectedItem is Epargne selection)
             {
-                if (MessageBox.Show("Supprimer cette épargne ?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if (await DialogHelper.ShowConfirmAsync(this, "Supprimer cette épargne ?", "Confirmation"))
                 {
                     using var db = new BudgetContext();
                     var epargne = db.Epargnes.Find(selection.Id);
@@ -139,11 +141,11 @@ namespace MyPlan
             }
             else
             {
-                MessageBox.Show("Sélectionnez une épargne à supprimer.");
+                await DialogHelper.ShowMessageAsync(this, "Sélectionnez une épargne à supprimer.");
             }
         }
 
-        private void Fermer_Click(object sender, RoutedEventArgs e)
+        private void Fermer_Click(object? sender, RoutedEventArgs e)
         {
             Accueil accueil = new Accueil();
             accueil.Show();

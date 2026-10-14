@@ -1,37 +1,34 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using Avalonia.Controls;
+using Avalonia.Interactivity;
+using Avalonia.Threading;
 using Microsoft.EntityFrameworkCore;
 using MyPlan.models;
-using LiveCharts;
-using LiveCharts.Wpf;
-using LiveCharts.Defaults;
+using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+using SkiaSharp;
 
 namespace MyPlan
 {
-    /// <summary>
-    /// Logique d'interaction pour DepenseView.xaml
-    /// </summary>
     public partial class DepenseView : Window
     {
-        public List<Categorie> CategorieList { get; set; }
-        public List<Transaction> DepenseList { get; set; }
+        public List<Categorie> CategorieList { get; set; } = new();
+        public List<Transaction> DepenseList { get; set; } = new();
+
+        private static readonly string[] ChartColors = new[]
+        {
+            "#FFA726", "#FB8C00", "#FFB74D", "#FFCC80", "#FFE0B2", "#F57C00"
+        };
+
         public DepenseView()
         {
             InitializeComponent();
         }
 
-        public void Window_Loaded(object sender, RoutedEventArgs e)
+        public void Window_Loaded(object? sender, RoutedEventArgs e)
         {
             ChargerCategories();
             ChargerDepenses();
@@ -39,23 +36,18 @@ namespace MyPlan
             DataContext = this;
         }
 
-        //Fonction permettant de charger les catégories stockées en base de données et de les ajouter aux
-        //listes déroulantes
         private void ChargerCategories()
         {
             using var db = new BudgetContext();
             CategorieList = db.Categories.OrderBy(c => c.Nom).ToList();
 
-            CategorieFilterComboBox.Items.Clear();
-            CategorieFilterComboBox.Items.Add("Tous");
-            foreach (var category in CategorieList)
-            {
-                CategorieFilterComboBox.Items.Add(category);
-            }
+            var items = new List<object> { "Tous" };
+            items.AddRange(CategorieList);
+
+            CategorieFilterComboBox.ItemsSource = items;
             CategorieFilterComboBox.SelectedIndex = 0;
         }
 
-        //Fonction permettant de charger les revenus et de les ajouter au tableau 
         private void ChargerDepenses(int? categorieId = null)
         {
             using var db = new BudgetContext();
@@ -73,58 +65,61 @@ namespace MyPlan
         {
             if (DepenseList == null || DepenseList.Count == 0)
             {
-                PieChartDepenses.Series = new SeriesCollection(); // Vide si aucun revenu
+                PieChartDepenses.Series = Array.Empty<ISeries>();
                 return;
             }
 
-            var seriesCollection = new SeriesCollection();
-
             var grouped = DepenseList
                 .Where(r => r.CategorieTransaction != null)
-                .GroupBy(r => r.CategorieTransaction.Nom)
+                .GroupBy(r => r.CategorieTransaction!.Nom)
                 .Select(g => new
                 {
                     Categorie = g.Key,
                     MontantTotal = g.Sum(t => t.Montant)
-                });
+                })
+                .ToList();
+
+            var seriesList = new List<ISeries>();
+            int colorIdx = 0;
 
             foreach (var group in grouped)
             {
-                seriesCollection.Add(new PieSeries
+                var colorHex = ChartColors[colorIdx % ChartColors.Length];
+                seriesList.Add(new PieSeries<double>
                 {
-                    Title = group.Categorie,
-                    Values = new ChartValues<ObservableValue> { new ObservableValue((double)group.MontantTotal) },
-                    DataLabels = true
+                    Name = group.Categorie,
+                    Values = new double[] { (double)group.MontantTotal },
+                    Fill = new SolidColorPaint(SKColor.Parse(colorHex)),
+                    DataLabelsPaint = new SolidColorPaint(SKColors.DarkSlateGray),
+                    DataLabelsFormatter = p => $"{p.Coordinate.PrimaryValue:N2} €"
                 });
+                colorIdx++;
             }
 
-            PieChartDepenses.Series = seriesCollection;
+            PieChartDepenses.Series = seriesList;
         }
 
-        //Fonction permettant d'éditer tous les champs d'un revenu 
-        private void ListeDepenses_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+        private void ListeDepenses_RowEditEnding(object? sender, DataGridRowEditEndingEventArgs e)
         {
             if (e.EditAction == DataGridEditAction.Commit)
             {
-                // Utiliser Dispatcher pour attendre la fin du commit
-                Dispatcher.InvokeAsync(() =>
+                Dispatcher.UIThread.Post(() =>
                 {
-                    if (e.Row.Item is Transaction transaction)
+                    if (e.Row.DataContext is Transaction transaction)
                     {
                         using var db = new BudgetContext();
                         var transactionExistante = db.Transactions
                             .Include(t => t.CategorieTransaction)
                             .FirstOrDefault(t => t.Id == transaction.Id);
-                        var ancienneValeur = transactionExistante.Montant;
 
                         if (transactionExistante != null)
                         {
+                            var ancienneValeur = transactionExistante.Montant;
                             transactionExistante.Description = transaction.Description;
                             transactionExistante.Montant = transaction.Montant;
                             transactionExistante.Date = transaction.Date;
                             transactionExistante.EstRevenu = transaction.EstRevenu;
 
-                            // Met à jour la catégorie
                             int? categorieId = transaction.CategorieTransaction?.Id;
                             if (categorieId.HasValue)
                             {
@@ -135,44 +130,43 @@ namespace MyPlan
                             {
                                 transactionExistante.CategorieTransaction = null;
                             }
+
                             AppState.Instance.Credit(ancienneValeur);
                             AppState.Instance.Debit(transaction.Montant);
                             db.SaveChanges();
                             ChargerDepenses();
                         }
                     }
-                }, System.Windows.Threading.DispatcherPriority.Background);
+                }, DispatcherPriority.Background);
             }
         }
 
-        //Fonction qui définit l'enregistrement en base de données des modifications 
-        private void Enregistrer_Click(object sender, RoutedEventArgs e)
+        private async void Enregistrer_Click(object? sender, RoutedEventArgs e)
         {
             using var db = new BudgetContext();
 
-            foreach (var revenu in DepenseList)
+            foreach (var depense in DepenseList)
             {
-                var existing = db.Transactions.Include(t => t.CategorieTransaction).FirstOrDefault(t => t.Id == revenu.Id);
+                var existing = db.Transactions.Include(t => t.CategorieTransaction).FirstOrDefault(t => t.Id == depense.Id);
                 if (existing != null)
                 {
-                    existing.Description = revenu.Description;
-                    existing.Montant = revenu.Montant;
-                    existing.Date = revenu.Date;
-                    existing.EstRevenu = revenu.EstRevenu;
+                    existing.Description = depense.Description;
+                    existing.Montant = depense.Montant;
+                    existing.Date = depense.Date;
+                    existing.EstRevenu = depense.EstRevenu;
 
-                    existing.CategorieTransaction = revenu.CategorieTransaction != null ?
-                        db.Categories.Find(revenu.CategorieTransaction.Id) : null;
+                    existing.CategorieTransaction = depense.CategorieTransaction != null ?
+                        db.Categories.Find(depense.CategorieTransaction.Id) : null;
                 }
             }
 
             db.SaveChanges();
-            MessageBox.Show("Modifications enregistrées avec succès !");
+            await DialogHelper.ShowMessageAsync(this, "Modifications enregistrées avec succès !");
         }
 
-        //Fonction permettant de filtrer les revenus selon sa catégorie
-        private void CategorieFilterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CategorieFilterComboBox_SelectionChanged(object? sender, SelectionChangedEventArgs e)
         {
-            if (CategorieFilterComboBox.SelectedItem is string && (string)CategorieFilterComboBox.SelectedItem == "Tous")
+            if (CategorieFilterComboBox.SelectedItem is string str && str == "Tous")
             {
                 ChargerDepenses();
             }
@@ -182,20 +176,16 @@ namespace MyPlan
             }
         }
 
-        //Fonction pour réinitialiser le filtre appliqué
-        private void ResetFilter_Click(object sender, RoutedEventArgs e)
+        private void ResetFilter_Click(object? sender, RoutedEventArgs e)
         {
             CategorieFilterComboBox.SelectedIndex = 0;
         }
 
-        //Fonction permettant de revenir au menu principal
-        private void RetourAccueil_Click(object sender, RoutedEventArgs e)
+        private void RetourAccueil_Click(object? sender, RoutedEventArgs e)
         {
             var accueil = new Accueil();
             accueil.Show();
             this.Close();
         }
-
-
     }
 }

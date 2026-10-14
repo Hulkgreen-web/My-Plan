@@ -1,4 +1,5 @@
-﻿using System.Windows;
+using System;
+using System.Diagnostics;
 using MyPlan.models;
 
 public sealed class AppState
@@ -22,7 +23,7 @@ public sealed class AppState
         }
     }
 
-    public event EventHandler BalanceChanged;
+    public event EventHandler? BalanceChanged;
 
     private AppState()
     {
@@ -47,7 +48,7 @@ public sealed class AppState
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Erreur de chargement du solde: {ex.Message}");
+            Debug.WriteLine($"Erreur de chargement du solde: {ex.Message}");
             _totalBalance = 0;
         }
     }
@@ -74,7 +75,7 @@ public sealed class AppState
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Erreur de sauvegarde du solde: {ex.Message}");
+            Debug.WriteLine($"Erreur de sauvegarde du solde: {ex.Message}");
         }
     }
 
